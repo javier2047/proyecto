@@ -1,29 +1,16 @@
-import {BrowserRouter,  Routes, Route,Navigate} from 'react-router-dom'
 
-import {Paginalistas} from './pages/ListaForms'
-import {Formulario} from './pages/formularios'
 
-import { Navegacion } from './components/navegacion'
+// frontend/src/App.jsx
+import React from 'react';
+import Formulario from '../components/formulario';
 
 function App() {
   return (
-    <BrowserRouter>
-    
-    <Navegacion/>
-    
-    <Routes>
-    <Route path="/" element={<Navigate to={"/ListaForms"} />} />
-    <Route path="/listaforms" element={<Paginalistas/>} > 
-    </Route>
-    <Route path="/forms" element={<Formulario/>} > 
-    </Route>
-
-
-    </Routes>
-    
-    
-    </BrowserRouter>
-  )
-  
+    <div className="App">
+      <h1>Formulario de Suspensiones</h1>
+      <Formulario />
+    </div>
+  );
 }
+
 export default App;
