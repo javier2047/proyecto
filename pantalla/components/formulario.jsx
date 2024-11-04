@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const Formulario = () => {
   const [formData, setFormData] = useState({
     nombre: '',

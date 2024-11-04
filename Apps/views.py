@@ -5,15 +5,25 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
+from rest_framework.decorators import api_view
 
-# Create your views here.
 
-class LoginView(APIView):
-    def post(self, request):
-        rut = request.data.get("rut")
-        contraseña = request.data.get("contraseña")
-        user = authenticate(rut=rut, contraseña=contraseña)
-        if user is not None:
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key}, status=status.HTTP_200_OK)
-        return Response({"error": "Credenciales inválidas"}, status=status.HTTP_401_UNAUTHORIZED)
+@api_view(['POST'])
+def login(request):
+    return  Response({})
+
+
+
+@api_view(['POST'])
+def registra(request):
+
+    print(request.data)
+
+    return  Response({})
+
+
+
+@api_view(['POST'])
+def perfil(request):
+    return  Response({})
+

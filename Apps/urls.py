@@ -1,10 +1,11 @@
-from  django.urls import path
+from  django.urls import path,include
+from rest_framework import routers
+from .views import login, registra, perfil
 
-from .views import ContactoView, LoginView
-
-
+routers =routers.DefaultRouter()
+routers.register(r'Apps',views.registra,'registra')
 
 urlpatterns = {
-    path('contacto/', ContactoView.as_view(), name='contacto'),
-    path('login/', LoginView.as_view(), name='login'),
+    path('login/',  login.as_view(), name='login'),
+    path('registra/', registra.as_view(), name='registra'),
 }
