@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 #  'drf_spectacular',
     'tasks',
     'forms',
-    'usuario',
+    'usuariosred',
     
 
 ]

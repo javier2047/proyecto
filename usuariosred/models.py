@@ -1,4 +1,10 @@
 from django.db import models
+
+# Create your models here.
+from django.db import models
+
+# Create your models here.
+from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -7,9 +13,9 @@ from rest_framework.authtoken.models import Token
 # Create your models here.
 
 
-class UsuarioRed(models.Model):
+class Usuarios(models.Model):
     
-    rut = models.CharField(max_length=12)
+    rut = models.CharField(max_length=12,unique= True)
 
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length = 20)
@@ -35,6 +41,6 @@ class UsuarioRed(models.Model):
         return f"{self.nombre}{self.apellido}" 
     
 #crea token automaticamente
-@receiver(post_save,sender = UsuarioRed)
+@receiver(post_save,sender = Usuarios)
 def crear_token(sender,instance=None,created=False,**kwargs):
     Token.objects.create(user=instance)

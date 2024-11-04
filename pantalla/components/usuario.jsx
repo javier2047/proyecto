@@ -26,7 +26,7 @@ const UserForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/usuarios/usuario', formData);
+      await axios.post('http://localhost:8000/usuario/api/usuariosred', formData);
       alert("Usuario creado exitosamente");
     } catch (error) {
       console.error("Hubo un error al crear el usuario:", error);
