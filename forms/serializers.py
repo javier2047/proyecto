@@ -5,6 +5,6 @@ from .models import Formularios
 
 class Formularioserializer(serializers.ModelSerializer):
     class Meta:
-       model = Formularios
+        model = Formularios
        # fields toma todos los valores que esten en Formularios
-       fields = '__all__'
+        fields = '__all__'

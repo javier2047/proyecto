@@ -4,20 +4,23 @@ from .models import Usuarios
 from .serializers import usuarioRedSerializer
 
 from .serializers import loginSerializer
+
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.hashers import check_password
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 
 class usuarioRedcrearViews(generics.CreateAPIView):
-
-    queryset = Usuarios.objects.all()
     serializer_class = usuarioRedSerializer
+    queryset = Usuarios.objects.all()
+    permission_classes = [AllowAny] 
+
 
 class LoginView(APIView):
-    permission_classes = []  #permitir acceso sin autentificacion
+    permission_classes = [AllowAny]  #permitir acceso sin autentificacion
 
     def post(self, request):
         serializer = loginSerializer(data=request.data)
