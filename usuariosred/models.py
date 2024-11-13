@@ -40,7 +40,3 @@ class Usuarios(models.Model):
     def __str__(self):
         return f"{self.nombre}{self.apellido}" 
     
-#crea token automaticamente
-@receiver(post_save,sender = Usuarios)
-def crear_token(sender,instance=None,created=False,**kwargs):
-    Token.objects.create(user=instance)

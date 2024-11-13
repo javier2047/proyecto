@@ -93,7 +93,7 @@ DATABASES = {
         'PORT': '3306',
                 'OPTIONS': {
             'ssl': {
-                'ca':  '..\\RedSalud\\pathpem\\eu-north-1-bundle.pem',
+                'ca':  '..\\proyecto\\pathpem\\eu-north-1-bundle.pem',
             }
         },
 
@@ -149,10 +149,5 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:5173"
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+
 }
