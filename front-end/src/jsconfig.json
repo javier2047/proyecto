@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".", // Base del proyecto
+      "paths": {
+        "@components/*": ["src/components/*"],
+        "@routes/*": ["src/routes/*"],
+        "@utils/*": ["src/utils/*"],
+        "@styles/*": ["src/styles/*"],
+        "@images/*": ["src/images/*"]
+      }
+    },
+    "exclude": ["node_modules", "dist"] // Excluir node_modules y dist
+  }
+  

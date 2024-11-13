@@ -24,7 +24,5 @@ dist-ssr
 *.sw?
 venv/
 
-#React 
-App.jsx
-index.css
-main.jsx
+back-end/venv
+front-end/node_modules
