@@ -17,10 +17,10 @@ function App() {
 */
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './LoginPage';
-import Medico from './components/formulario/formulario';
-import Administrador from './components/';
-import Supervisor from './components/dashboard/layout/Header';
+import LoginPage from '@components/login/navegacionlogin';
+import Medico from '@components/formulario/formulario';
+//import Administrador from './components/';
+import Supervisor from '@components/dashboard/layout/Header';
 
 const App = () => {
     return (
