@@ -32,7 +32,7 @@ export default function DashboardPage() {
             </div>
             {/* Seccion2 */}
             <div className='row'>
-                <div className='col-12 mb-3 mb-lg-0 col-lg-6'>
+                <div className='col-12 mb-3 mb-lg-0 col-lg-10 mx-auto'>
                         <Cancelaciones />
                 </div>
             </div>

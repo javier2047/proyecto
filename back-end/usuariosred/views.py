@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
+from django.contrib.auth import authenticate
 
 
 
@@ -18,21 +19,20 @@ class usuarioRedcrearViews(generics.CreateAPIView):
     queryset = Usuarios.objects.all()
     serializer_class = usuarioRedSerializer
 
-@APIView([POST])
-def login(request):
-    rut = request.data.get('rut')
-    contraseña: request.data.get('contraseña')
-    user = Authenticarte(rut=rut, contraseña= contraseña)
+class login (APIView):
+    def login(request):
+        rut = request.data.get('rut')
+        contraseña = request.data.get('contraseña')
 
-    if user:
-        # Suponiendo que usas `authtoken` para manejar sesiones
+        Usuarios = authenticate(rut = rut, contraseña=contraseña)
 
-        #importa el token
-        from rest_framework.authtoken.models import Token
-        token, _ = Token.objects.get_or_create(user= rut)
-        return JsonResponse({
-            'token': token.key,
-            'role': user.tipousuario  # Envía el tipo de usuario
-        })
-    else:
-        return JsonResponse({'error': 'Credenciales inválidas'}, status=401)
+        if Usuarios:
+            # Suponiendo que usas `authtoken` para manejar sesiones
+            from rest_framework.authtoken.models import Token
+            token, _ = Token.objects.get_or_create(Usuarios=Usuarios)
+            return JsonResponse({
+                'token': token.key,
+                'role': Usuarios.tipousuario  # Envía el tipo de usuario
+            })
+        else:
+            return JsonResponse({'error': 'Credenciales inválidas'}, status=401)
