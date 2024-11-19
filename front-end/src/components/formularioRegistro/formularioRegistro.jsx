@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import './formularioRegistro.css';
 
 
-const UserForm = () => {
+const UserFormR = () => {
   const [formData, setFormData] = useState({ 
     rut: '',
     nombre: '',
@@ -35,7 +35,7 @@ const UserForm = () => {
     }
   };
 
-  const handleEditButton = (e) => {
+  const handleEditButton = () => {
       if(confirm('¿Desea modificar algo?')){
        // fetch('')//Reedirecciona a la url para editar a los usuarios
         
@@ -123,4 +123,4 @@ const UserForm = () => {
 };
 
 
-export default UserForm;
+export default UserFormR;

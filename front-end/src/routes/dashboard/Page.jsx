@@ -1,6 +1,22 @@
 import Cancelaciones from '@routes/dashboard/Cancelaciones';
 import Layout from '@components/dashboard/layout/Layout';
+import { getCancelaciones } from '../../services/apiServiceDashboard'
+import { useEffect, useState } from 'react';
 export default function DashboardPage() {
+    const [totalCancelaciones, setTotalCancelaciones] = useState(0);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getCancelaciones();
+                setTotalCancelaciones(data.length);
+            } catch (error) {
+                console.error("Error al obtener las cancelaciones:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
     return (
         <Layout>
             <div className='my-5'>
@@ -11,7 +27,8 @@ export default function DashboardPage() {
             <div className='col-12 mb-3 mb-lg-0 col-lg-4'>
                     <div className='card'>
                         <div className='card-body'>
-                            <p>prueba1</p>
+                            <p>Total de cancelaciones</p>
+                            <h3>{totalCancelaciones}</h3> {/*Muestra aqui la suma*/}
                         </div>
                     </div>
                 </div>
