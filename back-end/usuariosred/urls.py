@@ -6,8 +6,12 @@ from rest_framework import routers
 from usuariosred import views
 
 
+routers =routers.DefaultRouter()
+routers.register(r'usuariosred',views.vistaRegistro,'Usuariosred')
+
 
 urlpatterns = [
+    path('api/registrar', include(routers.urls)),
     path('api/usuariosred/crear/', usuarioRedcrearViews.as_view(), name='crear_usuario'),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'), 
     path('api/login',login.as_view(),name= 'login') #url para el login

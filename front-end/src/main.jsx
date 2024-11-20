@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import DashboardPage from '@routes/dashboard/Page';
-import UserFormR from '@components/formularioRegistro/formularioRegistro';
+import UserFormRegister from '@components/formularioRegistro/formulario-registro';
 
 
 
@@ -21,9 +21,9 @@ const router = createBrowserRouter([
     element: <DashboardPage />
   },
   {
-    path: "/form",
-    element: <UserFormR />
-  }
+    path: "/formulario-registro",
+    element: <UserFormRegister/>
+  },
 
 ],
   {
