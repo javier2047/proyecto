@@ -5,7 +5,7 @@
     bottom: 0;
     width: 300px;
     z-index: 996;
-    transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
     padding: 20px;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -14,9 +14,20 @@
     background-color: #fff;
 }
 
-@media (min-width: 1199px) {
+#main, #footer {
+    transition: margin-left 0.3s ease-in-out;
+}
+
+@media (min-width: 1200px) {
     .sidebar{
-        left: -50px;
+        left: -300px;
+    }
+
+    .toggle-sidebar .sidebar{
+        left: 0;
+    }
+    #main, #footer {
+        margin-left: 0;
     }
 }
 
@@ -48,7 +59,7 @@
     }
 
     .toggle-sidebar .sidebar{
-        left: -300px;
+        left: -60px;
     }
 }
 
