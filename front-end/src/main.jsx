@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import DashboardPage from '@routes/dashboard/Page';
 import UserFormRegister from '@components/formularioRegistro/formulario-registro';
+import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 
 
 
@@ -16,6 +17,12 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
+
+  {
+    path: "/login",
+    element: <LoginForm />
+  },
+
   {
     path: "/dashboard",
     element: <DashboardPage />
