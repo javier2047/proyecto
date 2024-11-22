@@ -11,5 +11,5 @@
       }
     },
     "exclude": ["node_modules", "dist"] // Excluir node_modules y dist
-  }
+}
   

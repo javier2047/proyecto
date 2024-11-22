@@ -13,7 +13,7 @@ const UserFormRegister = () => {
     tipousuario: '',
     especialidad: '',
     jefeacargo: '',
-    nombresupervisor: '',
+    nommbresupervisor: '',
     apellidosupervisor: '',
     contraseña: '',
   });
@@ -55,7 +55,7 @@ const UserFormRegister = () => {
         tipousuario: '',
         especialidad: '',
         jefeacargo: '',
-        nombresupervisor: '',
+        nommbresupervisor: '',
         apellidosupervisor: '',
         contraseña: '',
       });
@@ -185,12 +185,12 @@ const UserFormRegister = () => {
           <input
             className="controls"
             type="text"
-            name="nombresupervisor"
-            value={formData.nombresupervisor}
+            name="nommbresupervisor"
+            value={formData.nommbresupervisor}
             onChange={handleChange}
             placeholder="Nombre Supervisor"
           />
-          {errors.nombresupervisor && <span className="error-message">{errors.nombresupervisor}</span>}
+          {errors.nommbresupervisor && <span className="error-message">{errors.nommbresupervisor}</span>}
         </div>
 
         <div className="form-group">
