@@ -9,6 +9,7 @@ import {
 import DashboardPage from '@routes/dashboard/Page';
 import UserFormRegister from '@components/formularioRegistro/formulario-registro';
 import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
+import AdminEstado from '@components/cambiarEstado/adminEstado';
 
 
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/formulario-registro",
     element: <UserFormRegister/>
+  },
+  {
+    path: "/estado",
+    element: <AdminEstado/>
   },
 
 ],

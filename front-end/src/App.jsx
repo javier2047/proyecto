@@ -10,8 +10,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 import Header from "@components/dashboard/layout/Header"
+
+import Formulario from '@components/formulario/formulario';
 function App() {
-  return <Header/>
+  return <Formulario/>
 }
 
 
