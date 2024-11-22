@@ -3,15 +3,24 @@
     z-index: 997;
     height: 60px;
     box-shadow: 0px 2px 20px rgba(1,41,112,0.1);
-    background-color: #fff;
+    background: linear-gradient(90deg,#029ca6, #b4dd51, #9ad0ae );
+    background-size: 300% 300%;
+    animation: gradientAnimation 6s ease infinite;
+    padding: 0 20px;
+    color: white;
     padding-left: 20px;
 }
 
+@keyframes gradientAnimation {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
 /* Search Bar */
 /* Toggle Sidebar Button */
 .header .toggle-sidebar-btn {
     font-size: 32px;
-    padding-left: 10px;
+    padding-left: 15px;
     cursor: pointer;
     color: #012970
 }
