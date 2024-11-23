@@ -8,14 +8,18 @@ import 'remixicon/fonts/remixicon.css';
 // import Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+
+import React from "react";
+import { BrowserRouter as Router, Route,Routes } from "react-router-dom";
 import Header from "@components/dashboard/layout/Header"
+import UserForm from "../src/components/formularioRegistro/formularioRegistro"
+import Login from '../src/components/login/login'
+import Formulario from '../src/components/formulario/formulario';
+
+
+
 
 /*
-function App() {
-  return <Header/>
-}
-*/
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from '@components/login/navegacionlogin';
 import Medico from '@components/formulario/formulario';
@@ -34,7 +38,7 @@ const App = () => {
         </Router>
     );
 };
-
+*/
 export default App;
 
 
