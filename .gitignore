@@ -26,3 +26,10 @@ venv/
 
 back-end/venv
 front-end/node_modules
+
+# ambiente virtual
+*pepe
+*os
+
+# Cache cochino
+*__pycache__*

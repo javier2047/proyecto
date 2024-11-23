@@ -1,21 +1,42 @@
 .logo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     line-height: 1;
+    width: auto !important;
 }
 
 @media (min-width: 1200px){
     .logo{
-        width: 280px;
+        width: 400px;
     }
 }
 
 .logo img{
-    max-height: 26px;
+    max-height: 40px;
     margin-right: 6px;
 }
 
 .logo span{
     font-size: 26px;
     font-weight: 700;
-    color: #012970;
+    color: #023E4A;
     font-family: 'Nunito', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.logo span:hover{
+    color: #b4dd51;
+}
+
+.logo i{
+ margin-left: 24px !important;
+ font-size: 24px;
+ cursor: pointer;
+}
+
+.logo a{
+    text-decoration: none;
 }
