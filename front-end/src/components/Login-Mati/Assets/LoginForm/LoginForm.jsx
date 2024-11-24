@@ -9,13 +9,16 @@ export const LoginForm = () => {
   return (
     <div className='wrapper'>
         <form action="POST">
-         <h1>Bienvenido a RedSalud</h1>
+         <img src="https://b2597467.smushcdn.com/2597467/wp-content/uploads/logo-redsalud-dental-blanco.png?lossy=1&strip=1&webp=1" alt="LogoLogin" className="LogoLogin" />
          <div className='input-box'>
-            <input type="text" placeholder='Usuario' required />
+            <input type="Usuario" placeholder='Usuario' required />
             <FaUser className='icon' />
         </div>
+        <div className='container'>
+            
+        </div>
         <div className='input-box'>
-            <input type="text" placeholder='Contraseña' required />
+            <input type="Contraseña" placeholder='Contraseña' required />
             <RiLockPasswordFill className='icon' />
         </div>
 
@@ -33,3 +36,5 @@ export const LoginForm = () => {
     </div>
   )
 }
+
+export default LoginForm
