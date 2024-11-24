@@ -9,10 +9,10 @@ function NavNotice() {
 
         <ul className='dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications'>
             <li className='dropdown-header'>
-                You have 4 new notifications
+                Tienes 4 nuevas notificaciones
                 <a href="/estado">
                     <span className='badge rounded-pill bg-primary p-2 ms-2'>
-                        View All
+                        Ver todos
                     </span>
                 </a>
             </li>
