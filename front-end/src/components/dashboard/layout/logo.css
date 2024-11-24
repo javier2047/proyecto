@@ -13,14 +13,15 @@
 }
 
 .logo img{
-    max-height: 40px;
+    max-height: 50px;
     margin-right: 6px;
 }
 
 .logo span{
-    font-size: 26px;
+    font-size: 25px;
+    align-items: center;
     font-weight: 700;
-    color: #023E4A;
+    color: #fff;
     font-family: 'Nunito', sans-serif;
     white-space: nowrap;
     overflow: hidden;

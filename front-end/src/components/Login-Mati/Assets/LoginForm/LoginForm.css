@@ -4,11 +4,12 @@
 .wrapper{
     width: 415px;
     height: 400;
-    background: transparent;
+    background: linear-gradient(135deg, rgba(255,255,255, 0,1), rgba(255,255,255,9));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     background-color: #cecece57;
-    border: 1px solid rgba(255, 255, 255, 0.562);
-    backdrop-filter: blur(50px);
-    box-shadow: 0 0 10px rgba(252, 252, 252, .2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.37);
     border-radius: 30px;
     padding: -10px -50px;
 }
@@ -130,11 +131,11 @@ body  {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('https://images.hdqwalls.com/wallpapers/gradient-minimal-abstract-5k-xv.jpg') no-repeat;
+  background: url('https://wallpapercave.com/wp/wp7571042.png') no-repeat;
   /* Eel background afecta login y dashboard */
   background-size: cover;
   background-position: center;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(30px);
 }
 
 code {
