@@ -13,9 +13,9 @@ const UserFormRegister = () => {
     tipousuario: '',
     especialidad: '',
     jefeacargo: '',
-    nombresupervisor: '',
+    nommbresupervisor: '',
     apellidosupervisor: '',
-    contraseña: '',
+    password: '',
   });
 
   const [errors, setErrors] = useState({}); // Para almacenar mensajes de error
@@ -55,9 +55,9 @@ const UserFormRegister = () => {
         tipousuario: '',
         especialidad: '',
         jefeacargo: '',
-        nombresupervisor: '',
+        nommbresupervisor: '',
         apellidosupervisor: '',
-        contraseña: '',
+        password: '',
       });
       setErrors({});
     } catch (error) {
@@ -185,12 +185,12 @@ const UserFormRegister = () => {
           <input
             className="controls"
             type="text"
-            name="nombresupervisor"
-            value={formData.nombresupervisor}
+            name="nommbresupervisor"
+            value={formData.nommbresupervisor}
             onChange={handleChange}
             placeholder="Nombre Supervisor"
           />
-          {errors.nombresupervisor && <span className="error-message">{errors.nombresupervisor}</span>}
+          {errors.nommbresupervisor && <span className="error-message">{errors.nommbresupervisor}</span>}
         </div>
 
         <div className="form-group">
@@ -207,16 +207,16 @@ const UserFormRegister = () => {
         </div>
 
         <div className="form-group">
-          <label>Contraseña:</label>
+          <label>password:</label>
           <input
             className="controls"
             type="password"
-            name="contraseña"
-            value={formData.contraseña}
+            name="password"
+            value={formData.password}
             onChange={handleChange}
-            placeholder="Contraseña"
+            placeholder="password"
           />
-          {errors.contraseña && <span className="error-message">{errors.contraseña}</span>}
+          {errors.password && <span className="error-message">{errors.password}</span>}
         </div>
 
         <button className="submit-button" type="submit">

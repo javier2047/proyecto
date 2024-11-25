@@ -28,4 +28,8 @@ back-end/venv
 front-end/node_modules
 
 # ambiente virtual
-pepe
+*pepe
+*os
+
+# Cache cochino
+*__pycache__*

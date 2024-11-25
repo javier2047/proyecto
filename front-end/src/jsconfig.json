@@ -8,8 +8,9 @@
         "@styles/*": ["src/styles/*"],
         "@images/*": ["src/images/*"],
         "@services/*": ["src/services/*"],
+
       }
     },
     "exclude": ["node_modules", "dist"] // Excluir node_modules y dist
-  }
+}
   

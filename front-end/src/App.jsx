@@ -11,9 +11,23 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 import Header from "@components/dashboard/layout/Header"
 
+<<<<<<< HEAD
 import Formulario from '@components/formulario/formulario';
+import Login from '@components/login/login';
+import UserFormRegister from '@components/formularioRegistro/formulario-registro'
+
+
 function App() {
-  return <Formulario/>
+  return <Header/>
+=======
+
+
+
+
+import LoginForm from '@components/Login-Mati/Assets/LoginForm/LoginForm';
+function App() {
+  return <LoginForm/>
+>>>>>>> 99640eeee578a5cf2a179a02692b5a573f47234b
 }
 
 
@@ -37,7 +51,11 @@ function App() {
 //     );
 //  };
 
+<<<<<<< HEAD
+export default App;
+=======
 export default App;
 
 
 
+>>>>>>> 99640eeee578a5cf2a179a02692b5a573f47234b

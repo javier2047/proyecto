@@ -8,3 +8,4 @@ class Formularioserializer(serializers.ModelSerializer):
         model = Formularios
        # fields toma todos los valores que esten en Formularios
         fields = '__all__'
+

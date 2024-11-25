@@ -12,10 +12,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+AUTH_USER_MODEL = 'user.Usuarios'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -38,16 +41,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #external apps
     'corsheaders',
+    'djoser',
+    'rest_framework_simplejwt',
     'rest_framework',
     'rest_framework.authtoken',
     #  'drf_spectacular',
+    #apps internos
     'tasks',
     'forms',
-    'usuariosred',
+    'user',
     
 
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,10 +69,19 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+'''
+AUTHENTICATION_BACKENDS = (
+    'usuariosred.authentication.autentificationRut',  # El backend personalizado
+    'django.contrib.auth.backends.ModelBackend',  # Si necesitas el backend predeterminado también
+)
+'''
+
+
+
 ROOT_URLCONF = 'misitio.urls'
 
 TEMPLATES = [
-    {
+    {   
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
@@ -148,6 +166,50 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #autorizacion del cors  autorizacion con el frond
 CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 
+
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 
 }
+
+SIMPLE_JWT ={
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    "AUTH_HEADER_TIPES":(
+        "Bearer",
+        "JWT"
+    ),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "AUTH_TOKEN_CLASSES":("rest_framework_simplejwt.token.AccessToken",),
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'rut',
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "SEND_CONFIRMATION_EMAIL": True,
+    "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
+    "SET_PASSWORD_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
+    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {
+        'user_create': 'user.serializers.CreateUserSerializer',
+        'user': "user.serializers.CreateUserSerializer",
+        'user_delete': "djoser.serializers.UserDeleteSerializer",      
+    }
+}
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = ("sandbox.smtp.mailtrap.io")
+EMAIL_USE_TLS = True
+EMAIL_PORT = ("2525")
+EMAIL_HOST_USER = ("75fde047458c54")
+EMAIL_HOST_PASSWORD = ("80a5041e9eadfd")
+DEFAULT_FROM_EMAIL = "info@journal-bullet.com"
+DOMAIN = ("localhost:5173")
+SITE_NAME = "pedro sanches"
