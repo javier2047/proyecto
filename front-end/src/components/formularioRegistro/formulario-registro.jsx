@@ -15,7 +15,7 @@ const UserFormRegister = () => {
     jefeacargo: '',
     nommbresupervisor: '',
     apellidosupervisor: '',
-    contraseña: '',
+    password: '',
   });
 
   const [errors, setErrors] = useState({}); // Para almacenar mensajes de error
@@ -57,7 +57,7 @@ const UserFormRegister = () => {
         jefeacargo: '',
         nommbresupervisor: '',
         apellidosupervisor: '',
-        contraseña: '',
+        password: '',
       });
       setErrors({});
     } catch (error) {
@@ -207,16 +207,16 @@ const UserFormRegister = () => {
         </div>
 
         <div className="form-group">
-          <label>Contraseña:</label>
+          <label>password:</label>
           <input
             className="controls"
             type="password"
-            name="contraseña"
-            value={formData.contraseña}
+            name="password"
+            value={formData.password}
             onChange={handleChange}
-            placeholder="Contraseña"
+            placeholder="password"
           />
-          {errors.contraseña && <span className="error-message">{errors.contraseña}</span>}
+          {errors.password && <span className="error-message">{errors.password}</span>}
         </div>
 
         <button className="submit-button" type="submit">

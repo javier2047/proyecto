@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/login/", {
+      const response = await axios.post("http://127.0.0.1:8000/usuariosred/api/login/", {
         rut,
         password,
       });
@@ -23,14 +22,12 @@ function Login() {
 
       // Redirigir según el tipo de usuario
       if (tipousuario === "medico") {
-        history.push("../formulario/formulario.jsx");
+        navigate("@components/formulario/formulario.jsx");
       } else if (tipousuario === "supervisor") {
-        history.push("../dashboard/layout");
+        navigate("@routes/dashboard/Pages.jsx");
       } else if (tipousuario === "administrativo") {
-        history.push("../formularioRegistro/formularioRegistro.jsx");
-      } else {
-        history.push("/default-dashboard"); // Página por defecto
-      }
+        navigate("@components/formularioRegistro/formulario-registro.jsx");
+      } 
     } catch (err) {
       setError("Credenciales incorrectas");
     }
@@ -60,18 +57,3 @@ function Login() {
 }
 
 export default Login;
-=======
-// import axios from 'axios';
-
-// const login = async (credentials) => {
-//     try {
-//         const response = await axios.post('http://localhost:8000/api/login/', credentials);
-//         const { token, role } = response.data;
-//         localStorage.setItem('token', token); // Guarda el token
-//         return role; // Retorna el rol del usuario
-//     } catch (error) {
-//         console.error('Error en el login:', error);
-//         return null;
-//     }
-// };
->>>>>>> 31123c6862c781f8326a0e571a5def5c167f4efa
