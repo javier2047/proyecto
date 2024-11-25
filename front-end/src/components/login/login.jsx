@@ -1,25 +1,40 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import { useState } from "react";
+>>>>>>> 99640eeee578a5cf2a179a02692b5a573f47234b
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [rut, setRut] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const navigate = useNavigate(); 
+    const [rut, setRut] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
 
+<<<<<<< HEAD
     try {
       const response = await axios.post("http://127.0.0.1:8000/usuariosred/api/login/", {
         rut,
         password,
       });
+=======
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/usuariosred/api/login/", {
+                rut,
+                password,
+            });
+>>>>>>> 99640eeee578a5cf2a179a02692b5a573f47234b
 
-      const { token, tipousuario } = response.data;
-      localStorage.setItem("token", token); // Guarda el token en el almacenamiento local
+            // Guardar tokens
+            localStorage.setItem("accessToken", response.data.access);
+            localStorage.setItem("refreshToken", response.data.refresh);
 
+<<<<<<< HEAD
       // Redirigir según el tipo de usuario
       if (tipousuario === "medico") {
         navigate("@components/formulario/formulario.jsx");
@@ -32,28 +47,54 @@ function Login() {
       setError("Credenciales incorrectas");
     }
   };
+=======
+            // Obtener el rol del usuario
+            const role = response.data.user.role;
+>>>>>>> 99640eeee578a5cf2a179a02692b5a573f47234b
 
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>RUT:</label>
-        <input
-          type="text"
-          value={rut}
-          onChange={(e) => setRut(e.target.value)}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-      {error && <p>{error}</p>}
-    </div>
-  );
+            // Redirigir según el rol
+            if (role === "supervisor") {
+                navigate("@routes/dashboard/Page.jsx");
+            } else if (role === "administrador") {
+                navigate("@components/formularioRegistro/formulario-registro");
+            } else if (role === "medico") {
+                navigate("@components/formulario/formulario.jsx");
+            } else {
+                setError("Rol de usuario no reconocido");
+            }
+        } catch (err) {
+            setError(err.response?.data?.detail || "Error al iniciar sesión");
+        }
+    };
+
+    return (
+        <div>
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>RUT:</label>
+                    <input
+                        type="text"
+                        value={rut}
+                        onChange={(e) => setRut(e.target.value)}
+                        required
+                        placeholder="Ej: 12345678-9"
+                    />
+                </div>
+                <div>
+                    <label>Contraseña:</label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Ingresar</button>
+            </form>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+        </div>
+    );
 }
 
 export default Login;
