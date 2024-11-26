@@ -106,19 +106,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'basered',
-        'USER': 'admin',
-        'PASSWORD': 'Wls=2054',
-        'HOST': 'db-base.cxmcauyos6cn.eu-north-1.rds.amazonaws.com',
-        'PORT': '3306',
-                'OPTIONS': {
-            'ssl': {
-                'ca': os.path.join(BASE_DIR, "pathpem", "eu-north-1-bundle.pem")
-                # "pathpem" / "eu-north-1-bundle.pem
-            }
+        'USER': 'root',
+        'PASSWORD': 'u+H0EwvGCSQhP',
+        'HOST': 'stgo.rchangl.com',
+        'PORT': '6580',
+        'OPTIONS': {
+                'ssl': False, 
+        }
+            # "pathpem" / "eu-north-1-bundle.pem
+            #}
         },
-
     }
-}
+
 
 
 # Password validation
