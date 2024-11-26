@@ -24,6 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tasks/',include('tasks.urls')),
     path('forms/', include('forms.urls')),
-    path('usuariosred/',include('usuariosred.urls')),
+    path('api/v1/auth/', include('djoser.urls')),
+    path('api/v1/auth/', include('djoser.urls.jwt')),
+
+    #path('usuarios/',include('usuarios.urls')),
 
 ]

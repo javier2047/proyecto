@@ -11,6 +11,7 @@ import UserFormRegister from '@components/formularioRegistro/formulario-registro
 import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
 import ResetPassword from '@components/restablecerContraseña/contraseña';
+import Formulario from '@components/formulario/formulario';
 
 
 const router = createBrowserRouter([
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
+
 
   {
     path: "/login",
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/password",
     element: <ResetPassword />
+  },
+  {
+    path: "/form",
+    element: <Formulario />
   },
 
 ],

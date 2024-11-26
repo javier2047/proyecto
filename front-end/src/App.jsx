@@ -11,13 +11,13 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 import Header from "@components/dashboard/layout/Header"
 
+import Formulario from '@components/formulario/formulario';
+import Login from '@components/login/login';
+import UserFormRegister from '@components/formularioRegistro/formulario-registro'
 
 
-
-
-import LoginForm from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 function App() {
-  return <LoginForm/>
+  return <Header/>
 }
 
 
@@ -27,20 +27,18 @@ function App() {
 // import UserForm from '@components/formularioRegistro/formularioRegistro';
 // import DashboardPage from '@routes/dashboard/Page';
 
-// function App() {
-//     return (
-//         <Router>
-//             <Routes>
+//function App() {
+//    return (
+//        <Router>
+//              <Routes>
 //                 <Route path="/" element={<LoginPage />} />
 //                 <Route path="/medico" element={<Formulario />} />
 //                 <Route path="/administrador" element={<UserForm />} />
 //                 <Route path="/supervisor" element={<DashboardPage />} />
-//             </Routes>
+//                 <Route path="/recuperar-hora-medica" element={<RecuperarHoraMedica />} /> 
+//              </Routes>
 //         </Router>
 //     );
-// };
+//  };
 
 export default App;
-
-
-

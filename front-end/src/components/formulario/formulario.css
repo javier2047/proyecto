@@ -1,0 +1,144 @@
+/* Estilos generales para todas las pantallas */
+
+
+body {
+  background-color: #02807F;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 150px; /* Tamaño predeterminado del logo */
+  height: auto;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.form-section {
+  margin-bottom: 20px;
+  border-top: 2px solid #02807F;
+  padding-top: 10px;
+}
+
+.form-section h3 {
+  font-size: 18px;
+  color: #02807F;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column; /* Comienza en columna para móviles */
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%; /* Ancho completo por defecto */
+  box-sizing: border-box; /* Ajuste de tamaño para incluir el padding */
+}
+
+/* Botón de envío */
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #02807F;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #026d69;
+}
+
+/* Mensaje de éxito */
+.success-message {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  margin: 15px 0;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.success-message.hidden {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Botón de cierre de sesión */
+.logout-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #ff0000d7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Media queries para pantallas más grandes */
+@media (min-width: 768px) {
+  .form-group {
+    flex-direction: row; /* En pantallas medianas, cambia a fila */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form-group label {
+    width: 30%; /* Ajuste para etiquetas en pantalla mediana */
+  }
+
+  .form-group input {
+    width: 65%; /* Ajuste para campos de entrada en pantalla mediana */
+  }
+
+  .submit-button {
+    font-size: 18px;
+    padding: 14px;
+  }
+
+  .form-container {
+    width: 80%; /* Ancho más estrecho para pantallas grandes */
+  }
+}
+
+@media (min-width: 1024px) {
+  .form-container {
+    width: 60%; /* Aún más estrecho en pantallas grandes */
+  }
+}
+

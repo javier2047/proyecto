@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Layout from "@components/dashboard/layout/Layout";
 
 function ResetPassword() {
   const [email, setEmail] = useState("");
@@ -17,7 +16,6 @@ function ResetPassword() {
   };
 
   return (
-    <Layout>
     <div
       style={{
      
@@ -167,7 +165,6 @@ function ResetPassword() {
         </form>
       </div>
     </div>
-    </Layout>
   );
 }
 
