@@ -14,11 +14,9 @@ import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
 import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
-<<<<<<< HEAD
-import RequestPasswordReset from '@components/enviarSolicitud/correo';
-=======
+import RequestPasswordReset from '@components>/enviarSolicitud/correo';
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
->>>>>>> 2d8f855620c9d88dc327f4674e39f86bbc0d65eb
+
 
 
 // Definición de las rutas
@@ -51,22 +49,15 @@ const router = createBrowserRouter([
     path: "/form", // Ruta para formulario
     element: <Formulario />,
   },
-<<<<<<< HEAD
-
   {
     path: "/correo",
     element: <RequestPasswordReset />
   },
-
-
-],
-=======
->>>>>>> 2d8f855620c9d88dc327f4674e39f86bbc0d65eb
   {
     path: "/recuperar-hora",  // Ruta para recuperación de hora médica
     element: <RecuperarHoraForm />,
   },
-], {
+{
   future: {
     v7_skipActionStatusRevalidation: true,
     v7_relativeSplatPath: true,
