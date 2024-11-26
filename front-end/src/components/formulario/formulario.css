@@ -67,6 +67,8 @@ body {
   cursor: pointer;
   margin-top: 20px;
   transition: background-color 0.3s;
+  opacity: 1; /* Asegura que siempre sea visible */
+  visibility: visible; /* Siempre visible */
 }
 
 .submit-button:hover {
@@ -93,9 +95,9 @@ body {
 
 /* Botón de cierre de sesión */
 .logout-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  position: absolute; /* Cambia de fixed a absolute */
+  top: 20px;          /* Ajusta la distancia desde la parte superior */
+  right: 20px;        /* Ajusta la distancia desde la parte derecha */
   padding: 10px 20px;
   background-color: #ff0000d7;
   color: white;
@@ -104,6 +106,7 @@ body {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
 }
 
 .logout-button:hover {
