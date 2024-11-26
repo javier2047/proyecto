@@ -10,7 +10,7 @@ import DashboardPage from '@routes/dashboard/Page';
 import UserFormRegister from '@components/formularioRegistro/formulario-registro';
 import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
-
+import ResetPassword from '@components/restablecerContraseña/contraseña';
 
 
 const router = createBrowserRouter([
@@ -35,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/estado",
     element: <AdminEstado/>
+  },
+  {
+    path: "/password",
+    element: <ResetPassword />
   },
 
 ],
