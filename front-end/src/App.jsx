@@ -9,15 +9,39 @@ import 'remixicon/fonts/remixicon.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
-import Header from "@components/dashboard/layout/Header"
+//import Header from "@components/dashboard/layout/Header"
 
 import Formulario from '@components/formulario/formulario';
-import Login from '@components/login/login';
+//import Login from '@components/login/login';
 import UserFormRegister from '@components/formularioRegistro/formulario-registro'
 
+//Seba
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "@components/dashboard/layout/Header"; // Importación correcta
+import RequestPasswordReset from '@components/enviarSolicitud/correo';
+import ResetPassword from '@components/restablecerContraseña/contraseña'; // Página para restablecer contraseña
+import Login from '@components/login/login'; // Página principal o login
 
 function App() {
-  return <Header/>
+  return (
+    <Router>
+      {/* Encabezado global */}
+      <Header />
+
+      {/* Configuración de rutas */}
+      <Routes>
+        {/* Ruta principal */}
+        <Route path="/" element={<Login />} />
+
+        {/* Solicitud de restablecimiento de contraseña */}
+        <Route path="/password/reset" element={<RequestPasswordReset />} />
+
+        {/* Confirmación de restablecimiento de contraseña */}
+        <Route path="/password/reset/confirm/:uid/:token" element={<ResetPassword />} />
+      </Routes>
+    </Router>
+  );
 }
 
 
@@ -33,6 +57,8 @@ function App() {
 //              <Routes>
 //                 <Route path="/" element={<LoginPage />} />
 //                 <Route path="/medico" element={<Formulario />} />
+//                 <Route path="/password/reset" element={<RequestPasswordReset />} />
+//                 <Route path="/password/reset/confirm/:uid/:token" element={<ResetPassword />} />
 //                 <Route path="/administrador" element={<UserForm />} />
 //                 <Route path="/supervisor" element={<DashboardPage />} />
 //                 <Route path="/recuperar-hora-medica" element={<RecuperarHoraMedica />} /> 

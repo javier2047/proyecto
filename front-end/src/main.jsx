@@ -12,6 +12,7 @@ import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
 import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
+import RequestPasswordReset from '@components/enviarSolicitud/correo';
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,12 @@ const router = createBrowserRouter([
     path: "/form",
     element: <Formulario />
   },
+
+  {
+    path: "/correo",
+    element: <RequestPasswordReset />
+  },
+
 
 ],
   {

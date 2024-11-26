@@ -1,24 +1,52 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 function ResetPassword() {
-  const [email, setEmail] = useState("");
+  const { uid, token } = useParams(); // Captura uid y token desde la URL
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       setMessage("Las contraseñas no coinciden.");
-    } else {
-      setMessage("Contraseña restablecida con éxito.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/v1/auth/users/reset_password_confirm/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ uid, token, new_password: password }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage("¡Contraseña restablecida con éxito!");
+      } else {
+        setMessage(result.error || "Hubo un problema al restablecer la contraseña.");
+      }
+    } catch (error) {
+      setMessage("Error en la solicitud. Intenta nuevamente.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div
       style={{
-     
         minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
@@ -28,7 +56,7 @@ function ResetPassword() {
     >
       <div
         style={{
-          background: "rgba(255, 255, 255, 0.1)", // Fondo blanco con 80% de transparencia
+          background: "rgba(255, 255, 255, 0.1)",
           padding: "20px 40px",
           borderRadius: "10px",
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
@@ -45,34 +73,6 @@ function ResetPassword() {
           Restablecimiento de Contraseña
         </h2>
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "15px" }}>
-            <label
-              htmlFor="email"
-              style={{
-                display: "block",
-                marginBottom: "5px",
-                color: "#333",
-                fontWeight: "bold",
-              }}
-            >
-              Correo Electrónico:
-            </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Ingresa tu correo"
-              style={{
-                width: "100%",
-                padding: "10px",
-                fontSize: "16px",
-                borderRadius: "5px",
-                border: "1px solid #ddd",
-              }}
-              required
-            />
-          </div>
           <div style={{ marginBottom: "15px" }}>
             <label
               htmlFor="password"
@@ -153,14 +153,15 @@ function ResetPassword() {
               width: "100%",
               padding: "10px",
               fontSize: "16px",
-              backgroundColor: "#3a7bd5",
+              backgroundColor: isLoading ? "#ccc" : "#3a7bd5",
               color: "white",
               border: "none",
               borderRadius: "5px",
-              cursor: "pointer",
+              cursor: isLoading ? "not-allowed" : "pointer",
             }}
+            disabled={isLoading}
           >
-            Restablecer Contraseña
+            {isLoading ? "Procesando..." : "Restablecer Contraseña"}
           </button>
         </form>
       </div>
