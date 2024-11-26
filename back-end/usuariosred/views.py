@@ -74,6 +74,19 @@ class LoginView(APIView):
 
 
 
+<<<<<<< HEAD
+        if Usuarios:
+            # Suponiendo que usas authtoken para manejar sesiones
+            from restframework.authtoken.models import Token
+            token,  = Token.objects.get_or_create(user=user)
+            return JsonResponse({
+                'token': token.key,
+                'role': Usuarios.tipousuario  # Envía el tipo de usuario
+            })
+        else:
+            return JsonResponse({'error': 'Credenciales inválidas'}, status=401)
+=======
 
 '''
 
+>>>>>>> 943ef153e47f4df955220061b6dd1a677d545cdd

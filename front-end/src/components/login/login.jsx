@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-=======
 import { useState } from "react";
->>>>>>> 99640eeee578a5cf2a179a02692b5a573f47234b
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -16,41 +12,18 @@ function Login() {
         e.preventDefault();
         setError("");
 
-<<<<<<< HEAD
-    try {
-      const response = await axios.post("http://127.0.0.1:8000/usuariosred/api/login/", {
-        rut,
-        password,
-      });
-=======
         try {
             const response = await axios.post("http://127.0.0.1:8000/usuariosred/api/login/", {
                 rut,
                 password,
             });
->>>>>>> 99640eeee578a5cf2a179a02692b5a573f47234b
 
             // Guardar tokens
             localStorage.setItem("accessToken", response.data.access);
             localStorage.setItem("refreshToken", response.data.refresh);
 
-<<<<<<< HEAD
-      // Redirigir según el tipo de usuario
-      if (tipousuario === "medico") {
-        navigate("@components/formulario/formulario.jsx");
-      } else if (tipousuario === "supervisor") {
-        navigate("@routes/dashboard/Pages.jsx");
-      } else if (tipousuario === "administrativo") {
-        navigate("@components/formularioRegistro/formulario-registro.jsx");
-      } 
-    } catch (err) {
-      setError("Credenciales incorrectas");
-    }
-  };
-=======
             // Obtener el rol del usuario
             const role = response.data.user.role;
->>>>>>> 99640eeee578a5cf2a179a02692b5a573f47234b
 
             // Redirigir según el rol
             if (role === "supervisor") {
