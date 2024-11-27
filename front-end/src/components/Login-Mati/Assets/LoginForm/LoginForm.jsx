@@ -47,7 +47,7 @@ export const LoginForm = () => {
 
           // Redirigir según el tipo de usuario
           if (userType === 'supervisor') {
-            toast.success('Inicio de sesión exitoso. Redirigiendo al dashboard...', {
+            toast.success('Inicio de sesión exitoso. Redirigiendo al panel de Supervisor...', {
               position: "top-right",
               autoClose: 3000,
               hideProgressBar: false,
