@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './LoginForm.css';
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 export const LoginForm = () => {
-  const [rut, setrut] = useState('');
+  const [rut, setRut] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
@@ -13,7 +13,8 @@ export const LoginForm = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/v1/auth/jwt/create/', {
+      // Hacer login y obtener el token
+      const loginResponse = await fetch('http://127.0.0.1:8000/api/v1/auth/jwt/create/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,19 +22,51 @@ export const LoginForm = () => {
         body: JSON.stringify({ rut, password }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('token', data.token);
-        alert('Inicio de sesión exitoso');
-        window.location.href = '/dashboard';
+      if (loginResponse.ok) {
+        const loginData = await loginResponse.json();
+        const token = loginData.access; // Obtén el token de acceso
+        
+
+        // Almacenar el token en localStorage
+        localStorage.setItem('token', token);
+
+        // Obtener información del usuario
+        const userResponse = await fetch('http://127.0.0.1:8000/api/v1/auth/users/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // Usar el token dinámico
+          },
+        });
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          const currentUser = userData.find((user) => user.rut === rut);
+          const userType = currentUser?.tipousuario; // Acceder al tipo de usuario
+          console.log(userData);
+
+
+          // Redirigir según el tipo de usuario
+          if (userType === 'supervisor') {
+            window.location.href = '/dashboard';
+          } else if (userType === 'medico') {
+            window.location.href = '/form';
+          } else if (userType === 'administrativo') {
+            window.location.href = '/formulario-registro';
+          } else {
+            setError('Tipo de usuario no reconocido.');
+          }
+        } else {
+          setError('Error al obtener la información del usuario.');
+        }
       } else {
-        setError('Usuario o contraseña incorrectos');
+        setError('Usuario o contraseña incorrectos.');
       }
-    } catch (err) {
-      setError('Error al conectar con el servidor');
+    } catch (e) {
+      setError('Error al conectar con el servidor.');
     }
   };
-
+  
   return (
     <div className='wrapper'>
       <form onSubmit={handleSubmit}>
@@ -48,11 +81,11 @@ export const LoginForm = () => {
             placeholder='Usuario'
             required
             value={rut}
-            onChange={(e) => setrut(e.target.value)} 
+            onChange={(e) => setRut(e.target.value)} 
           />
           <FaUser className='icon' />
         </div>
-        <div className='input-box'>
+        <div className='input-box mt-2'>
           <input
             type="password"
             placeholder='Contraseña'
@@ -71,10 +104,6 @@ export const LoginForm = () => {
         {error && <p className="error-message">{error}</p>}
         
         <button type="submit">Ingresar</button>
-
-        <div className='register-link'>
-          <p>¿No tienes una cuenta? <a href="#">Registrarse</a></p>
-        </div>
       </form>
     </div>
   );

@@ -75,7 +75,7 @@ const UserFormRegister = () => {
     <div className="form-container">
       <form className="form-register" onSubmit={handleSubmit}>
         <div className="form-title">Formulario de Registro</div>
-
+  
         <div className="form-group">
           <label>RUT:</label>
           <input
@@ -88,7 +88,7 @@ const UserFormRegister = () => {
           />
           {errors.rut && <span className="error-message">{errors.rut}</span>}
         </div>
-
+  
         <div className="form-group">
           <label>Nombre:</label>
           <input
@@ -101,7 +101,7 @@ const UserFormRegister = () => {
           />
           {errors.nombre && <span className="error-message">{errors.nombre}</span>}
         </div>
-
+  
         <div className="form-group">
           <label>Apellido:</label>
           <input
@@ -114,7 +114,7 @@ const UserFormRegister = () => {
           />
           {errors.apellido && <span className="error-message">{errors.apellido}</span>}
         </div>
-
+  
         <div className="form-group">
           <label>Segundo Apellido:</label>
           <input
@@ -127,7 +127,7 @@ const UserFormRegister = () => {
           />
           {errors.segundoapellido && <span className="error-message">{errors.segundoapellido}</span>}
         </div>
-
+  
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -140,7 +140,7 @@ const UserFormRegister = () => {
           />
           {errors.email && <span className="error-message">{errors.email}</span>}
         </div>
-
+  
         <div className="form-group">
           <label>Tipo de Usuario:</label>
           <select
@@ -156,7 +156,7 @@ const UserFormRegister = () => {
           </select>
           {errors.tipousuario && <span className="error-message">{errors.tipousuario}</span>}
         </div>
-
+  
         <div className="form-group">
           <label>Contraseña:</label>
           <input
@@ -169,7 +169,7 @@ const UserFormRegister = () => {
           />
           {errors.password && <span className="error-message">{errors.password}</span>}
         </div>
-
+  
         <div className="form-group">
           <label>Confirmar Contraseña:</label>
           <input
@@ -182,13 +182,33 @@ const UserFormRegister = () => {
           />
           {errors.re_password && <span className="error-message">{errors.re_password}</span>}
         </div>
-
+  
         <button className="submit-button" type="submit">
           Crear Usuario
         </button>
       </form>
+  
+      <button
+        className="logout-button"
+        onClick={() => {
+          localStorage.removeItem('token'); // Elimina el token almacenado
+          window.location.href = '/login'; // Redirige a la ruta de login
+        }}
+        style={{
+          marginTop: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#f44336',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+      >
+        Cerrar Sesión
+      </button>
     </div>
   );
+  
 };
 
 export default UserFormRegister;
