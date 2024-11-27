@@ -8,6 +8,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     background-color: #cecece57;
+    position: static;
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 0 32px rgba(0, 0, 0, 0.37);
     border-radius: 30px;
@@ -131,14 +132,22 @@ body  {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('https://wallpapercave.com/wp/wp7571042.png') no-repeat;
+  background: url('https://xmple.com/wallpaper/gradient-blue-green-linear-1920x1080-c2-00008b-00fa9a-a-60-f-14.svg') no-repeat;
   /* Eel background afecta login y dashboard */
   background-size: cover;
   background-position: center;
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(200px);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.Toastify__toast-container {
+    position: fixed !important; /* Asegura que sea fijo y relativo al viewport */
+    top: 20px; /* Distancia desde la parte superior */
+    right: 20px; /* Distancia desde la parte derecha */
+    z-index: 9999; /* Por encima de todos los elementos */
+    pointer-events: auto; 
 }
