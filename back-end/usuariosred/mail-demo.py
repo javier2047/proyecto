@@ -1,4 +1,4 @@
-
+#NO SIRVE, osea sirve pero no para lo que creia. NO USAR!!!!
 import os
 import smtplib
 

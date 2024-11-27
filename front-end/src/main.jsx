@@ -16,6 +16,7 @@ import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
 import RequestPasswordReset from '@components/enviarSolicitud/correo';  // Note: fixed path typo
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
+import UserActivation from '@components/autentificacion/autentificacion-usuario' //deberia estar bien.
 
 // Definición de las rutas
 const router = createBrowserRouter([
@@ -54,7 +55,12 @@ const router = createBrowserRouter([
   {
     path: "/recuperar-hora",  // Ruta para recuperación de hora médica
     element: <RecuperarHoraForm />,
-  }
+  },
+  {
+    path:"/activacion-usuario", // Ruta para la activacion del usuario.  
+    element: <UserActivation />, 
+  },
+
 ]);
 
 // Renderizado en el root
