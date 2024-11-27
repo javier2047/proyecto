@@ -45,7 +45,7 @@ export const LoginForm = () => {
         <div className='input-box'>
           <input
             type="text"
-            placeholder='Usuario'
+            placeholder='Usuariosss'
             required
             value={rut}
             onChange={(e) => setrut(e.target.value)} 

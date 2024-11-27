@@ -11,14 +11,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--bgColor);
-  color: #444444
-}
-
+  color: #444444;
+  }
 a{
   color: var(--primary);
   text-decoration: none;
