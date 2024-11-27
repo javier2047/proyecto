@@ -43,7 +43,7 @@ const router = createBrowserRouter([
     element: <AdminEstado />, // Ruta para cambiar estado
   },
   {
-    path: '/password',
+    path: '/password/reset/confirm/:uid/:token',
     element: <ResetPassword />, // Ruta para restablecer contraseña
   },
   {
