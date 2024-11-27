@@ -1,4 +1,3 @@
-import Header from "@components/dashboard/layout/Header";
 import React, { useState } from 'react';
 import axios from 'axios';
 import './formularioregistro.css';
@@ -11,11 +10,8 @@ const UserFormRegister = () => {
     segundoapellido: '',
     email: '',
     tipousuario: '',
-    especialidad: '',
-    jefeacargo: '',
-    nommbresupervisor: '',
-    apellidosupervisor: '',
     password: '',
+    re_password: '',
   });
 
   const [errors, setErrors] = useState({}); // Para almacenar mensajes de error
@@ -36,6 +32,11 @@ const UserFormRegister = () => {
       }
     });
 
+    // Validación de coincidencia de contraseñas
+    if (formData.password !== formData.re_password) {
+      newErrors.re_password = 'Las contraseñas no coinciden';
+    }
+    console.log(formData); // Log de los datos para asegurarte de que son correctos
     setErrors(newErrors);
 
     // Evitar enviar si hay errores
@@ -44,8 +45,14 @@ const UserFormRegister = () => {
     }
 
     try {
-      await axios.post('http://127.0.0.1:8000/usuariosred/api/registrarusuariosred/', formData);
+      // Elimina el campo `re_password` antes de enviar la solicitud
+      const { re_password, ...dataToSubmit } = formData;
+
+      // Enviar datos al backend
+      await axios.post('http://127.0.0.1:8000/api/v1/auth/users/?format=api', dataToSubmit);
+
       alert('Formulario enviado exitosamente');
+      
       setFormData({
         rut: '',
         nombre: '',
@@ -53,12 +60,10 @@ const UserFormRegister = () => {
         segundoapellido: '',
         email: '',
         tipousuario: '',
-        especialidad: '',
-        jefeacargo: '',
-        nommbresupervisor: '',
-        apellidosupervisor: '',
         password: '',
+        re_password: '',
       });
+      
       setErrors({});
     } catch (error) {
       console.error('Error enviando formulario:', error);
@@ -67,8 +72,6 @@ const UserFormRegister = () => {
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100">
-            <Header />
     <div className="form-container">
       <form className="form-register" onSubmit={handleSubmit}>
         <div className="form-title">Formulario de Registro</div>
@@ -76,7 +79,7 @@ const UserFormRegister = () => {
         <div className="form-group">
           <label>RUT:</label>
           <input
-            className="controls"
+            className={`controls ${errors.rut ? 'error' : ''}`}
             type="text"
             name="rut"
             value={formData.rut}
@@ -89,7 +92,7 @@ const UserFormRegister = () => {
         <div className="form-group">
           <label>Nombre:</label>
           <input
-            className="controls"
+            className={`controls ${errors.nombre ? 'error' : ''}`}
             type="text"
             name="nombre"
             value={formData.nombre}
@@ -102,7 +105,7 @@ const UserFormRegister = () => {
         <div className="form-group">
           <label>Apellido:</label>
           <input
-            className="controls"
+            className={`controls ${errors.apellido ? 'error' : ''}`}
             type="text"
             name="apellido"
             value={formData.apellido}
@@ -115,7 +118,7 @@ const UserFormRegister = () => {
         <div className="form-group">
           <label>Segundo Apellido:</label>
           <input
-            className="controls"
+            className={`controls ${errors.segundoapellido ? 'error' : ''}`}
             type="text"
             name="segundoapellido"
             value={formData.segundoapellido}
@@ -128,7 +131,7 @@ const UserFormRegister = () => {
         <div className="form-group">
           <label>Email:</label>
           <input
-            className="controls"
+            className={`controls ${errors.email ? 'error' : ''}`}
             type="email"
             name="email"
             value={formData.email}
@@ -141,89 +144,49 @@ const UserFormRegister = () => {
         <div className="form-group">
           <label>Tipo de Usuario:</label>
           <select
-            className="controls"
+            className={`controls ${errors.tipousuario ? 'error' : ''}`}
             name="tipousuario"
             value={formData.tipousuario}
             onChange={handleChange}
           >
             <option value="">Seleccione Tipo de Usuario</option>
-            <option value="administrativo">Administrativo</option>
-            <option value="supervisor">Supervisor</option>
             <option value="medico">Médico</option>
+            <option value="supervisor">Supervisor</option>
+            <option value="administrativo">Administrador</option>
           </select>
           {errors.tipousuario && <span className="error-message">{errors.tipousuario}</span>}
         </div>
 
         <div className="form-group">
-          <label>Especialidad:</label>
+          <label>Contraseña:</label>
           <input
-            className="controls"
-            type="text"
-            name="especialidad"
-            value={formData.especialidad}
-            onChange={handleChange}
-            placeholder="Especialidad"
-          />
-          {errors.especialidad && <span className="error-message">{errors.especialidad}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Jefe a Cargo:</label>
-          <input
-            className="controls"
-            type="text"
-            name="jefeacargo"
-            value={formData.jefeacargo}
-            onChange={handleChange}
-            placeholder="Jefe a cargo"
-          />
-          {errors.jefeacargo && <span className="error-message">{errors.jefeacargo}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Nombre Supervisor:</label>
-          <input
-            className="controls"
-            type="text"
-            name="nommbresupervisor"
-            value={formData.nommbresupervisor}
-            onChange={handleChange}
-            placeholder="Nombre Supervisor"
-          />
-          {errors.nommbresupervisor && <span className="error-message">{errors.nommbresupervisor}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Apellido Supervisor:</label>
-          <input
-            className="controls"
-            type="text"
-            name="apellidosupervisor"
-            value={formData.apellidosupervisor}
-            onChange={handleChange}
-            placeholder="Apellido Supervisor"
-          />
-          {errors.apellidosupervisor && <span className="error-message">{errors.apellidosupervisor}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>password:</label>
-          <input
-            className="controls"
+            className={`controls ${errors.password ? 'error' : ''}`}
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="password"
+            placeholder="Contraseña"
           />
           {errors.password && <span className="error-message">{errors.password}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Confirmar Contraseña:</label>
+          <input
+            className={`controls ${errors.re_password ? 'error' : ''}`}
+            type="password"
+            name="re_password"
+            value={formData.re_password}
+            onChange={handleChange}
+            placeholder="Confirmar Contraseña"
+          />
+          {errors.re_password && <span className="error-message">{errors.re_password}</span>}
         </div>
 
         <button className="submit-button" type="submit">
           Crear Usuario
         </button>
       </form>
-    </div>
     </div>
   );
 };

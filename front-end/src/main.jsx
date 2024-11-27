@@ -14,10 +14,12 @@ import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
 import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
+<<<<<<< HEAD
 import RequestPasswordReset from '@components/enviarSolicitud/correo';
+=======
+import RequestPasswordReset from '@components/enviarSolicitud/correo';  // Note: fixed path typo
+>>>>>>> 3e76b9669cc734c2dadece0e57b8e630e38d2e77
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
-
-
 
 // Definición de las rutas
 const router = createBrowserRouter([
@@ -56,6 +58,7 @@ const router = createBrowserRouter([
   {
     path: "/recuperar-hora",  // Ruta para recuperación de hora médica
     element: <RecuperarHoraForm />,
+<<<<<<< HEAD
   },
 {
   future: {
@@ -66,15 +69,24 @@ const router = createBrowserRouter([
     v7_partialHydration: true,
   },
 },]);
+=======
+  }
+]);
+>>>>>>> 3e76b9669cc734c2dadece0e57b8e630e38d2e77
 
 // Renderizado en el root
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider
+      router={router}
       future={{
+        v7_skipActionStatusRevalidation: true,
+        v7_relativeSplatPath: true,
+        v7_fetcherPersist: true,
+        v7_normalizeFormMethod: true,
+        v7_partialHydration: true,
         v7_startTransition: true,
       }}
-      router={router} 
     />
   </StrictMode>,
 );
