@@ -1,11 +1,13 @@
 import './index.css';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 import App from './App.jsx';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 // Importación de componentes
 import DashboardPage from '@routes/dashboard/Page';
@@ -16,68 +18,68 @@ import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
 import RequestPasswordReset from '@components/enviarSolicitud/correo';
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
+import ActivatePage from '@routes/ActivatePage';
 
 // Definición de las rutas
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />, // Página principal
   },
   {
-    path: "/login",
+    path: '/login',
     element: <LoginForm />, // Ruta de login
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     element: <DashboardPage />, // Ruta del dashboard
   },
   {
-    path: "/formulario-registro",
+    path: '/formulario-registro',
     element: <UserFormRegister />, // Ruta para el formulario de registro
   },
   {
-    path: "/estado",
+    path: '/estado',
     element: <AdminEstado />, // Ruta para cambiar estado
   },
   {
-    path: "/password",
+    path: '/password',
     element: <ResetPassword />, // Ruta para restablecer contraseña
   },
   {
-    path: "/form", // Ruta para formulario
-    element: <Formulario />,
+    path: '/form',
+    element: <Formulario />, // Ruta para formulario
   },
   {
-    path: "/correo",
+    path: '/correo',
     element: <RequestPasswordReset />,
   },
   {
-    path: "/recuperar-hora",  // Ruta para recuperación de hora médica
+    path: '/recuperar-hora', // Ruta para recuperación de hora médica
     element: <RecuperarHoraForm />,
   },
-{
-  future: {
-    v7_skipActionStatusRevalidation: true,
-    v7_relativeSplatPath: true,
-    v7_fetcherPersist: true,
-    v7_normalizeFormMethod: true,
-    v7_partialHydration: true,
+  {
+    path: '/activate/:uid/:token',
+    element: <ActivatePage />, // Ruta para activar la cuenta
   },
-},]);
+]);
+
 
 // Renderizado en el root
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider
-      router={router}
-      future={{
-        v7_skipActionStatusRevalidation: true,
-        v7_relativeSplatPath: true,
-        v7_fetcherPersist: true,
-        v7_normalizeFormMethod: true,
-        v7_partialHydration: true,
-        v7_startTransition: true,
-      }}
-    />
-  </StrictMode>,
+    <Provider store={store}>
+      <RouterProvider
+        router={router}
+        future={{
+          v7_skipActionStatusRevalidation: true,
+          v7_relativeSplatPath: true,
+          v7_fetcherPersist: true,
+          v7_normalizeFormMethod: true,
+          v7_partialHydration: true,
+          v7_startTransition: true,
+        }}
+      />
+    </Provider>
+  </StrictMode>
 );
