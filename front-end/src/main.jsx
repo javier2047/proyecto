@@ -16,7 +16,7 @@ import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
 import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
-import RequestPasswordReset from '@components/enviarSolicitud/correo';
+import RequestPasswordReset from '@components/enviarSolicitud/correo';  // Note: fixed path typo
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 import ActivatePage from '@routes/ActivatePage';
 
@@ -60,9 +60,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/activate/:uid/:token',
-    element: <ActivatePage />,
+    element: <ActivatePage />, // Ruta para activar la cuenta
   },
 ]);
+
 
 // Renderizado en el root
 createRoot(document.getElementById('root')).render(
