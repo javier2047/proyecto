@@ -14,7 +14,7 @@ import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
 import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
-import RequestPasswordReset from '@components>/enviarSolicitud/correo';
+import RequestPasswordReset from '@components/enviarSolicitud/correo';
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 
 
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/correo",
-    element: <RequestPasswordReset />
+    element: <RequestPasswordReset />,
   },
   {
     path: "/recuperar-hora",  // Ruta para recuperación de hora médica
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
     v7_normalizeFormMethod: true,
     v7_partialHydration: true,
   },
-});
+},]);
 
 // Renderizado en el root
 createRoot(document.getElementById('root')).render(
