@@ -2,15 +2,15 @@ import { useState } from 'react';
 import './LoginForm.css';
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export const LoginForm = () => {
   const [rut, setRut] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
     try {
       // Hacer login y obtener el token
@@ -35,7 +35,7 @@ export const LoginForm = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`, // Usar el token dinámico
+            Authorization: 'Bearer ${token}', // Usar el token dinámico
           },
         });
 
@@ -109,4 +109,4 @@ export const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginForm;
