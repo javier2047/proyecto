@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './LoginForm.css';
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const LoginForm = () => {
   const [rut, setRut] = useState('');
@@ -25,7 +27,6 @@ export const LoginForm = () => {
       if (loginResponse.ok) {
         const loginData = await loginResponse.json();
         const token = loginData.access; // Obtén el token de acceso
-        
 
         // Almacenar el token en localStorage
         localStorage.setItem('token', token);
@@ -35,7 +36,7 @@ export const LoginForm = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ${token}', // Usar el token dinámico
+            Authorization: `Bearer ${token}`, // Usar el token dinámico
           },
         });
 
@@ -43,70 +44,131 @@ export const LoginForm = () => {
           const userData = await userResponse.json();
           const currentUser = userData.find((user) => user.rut === rut);
           const userType = currentUser?.tipousuario; // Acceder al tipo de usuario
-          console.log(userData);
-
 
           // Redirigir según el tipo de usuario
           if (userType === 'supervisor') {
-            window.location.href = '/dashboard';
+            toast.success('Inicio de sesión exitoso. Redirigiendo al dashboard...', {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+            setTimeout(() => {
+              window.location.href = '/dashboard';
+            }, 3000);
           } else if (userType === 'medico') {
-            window.location.href = '/form';
+            toast.success('Inicio de sesión exitoso. Redirigiendo al formulario médico...', {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+            setTimeout(() => {
+              window.location.href = '/form';
+            }, 3000);
           } else if (userType === 'administrativo') {
-            window.location.href = '/formulario-registro';
+            toast.success('Inicio de sesión exitoso. Redirigiendo al formulario administrativo...', {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+            setTimeout(() => {
+              window.location.href = '/formulario-registro';
+            }, 3000);
           } else {
-            setError('Tipo de usuario no reconocido.');
+            toast.error('Tipo de usuario no reconocido.', {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
           }
         } else {
-          setError('Error al obtener la información del usuario.');
+          toast.error('Error al obtener la información del usuario.', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
         }
       } else {
-        setError('Usuario o contraseña incorrectos.');
+        toast.error('Usuario o contraseña incorrectos.', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       }
     } catch (e) {
-      setError('Error al conectar con el servidor.');
+      toast.error('Error al conectar con el servidor.', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
-  
+
   return (
-    <div className='wrapper'>
-      <form onSubmit={handleSubmit}>
-        <img
-          src="https://b2597467.smushcdn.com/2597467/wp-content/uploads/logo-redsalud-dental-blanco.png?lossy=1&strip=1&webp=1"
-          alt="LogoLogin"
-          className="LogoLogin"
-        />
-        <div className='input-box'>
-          <input
-            type="text"
-            placeholder='Usuario'
-            required
-            value={rut}
-            onChange={(e) => setRut(e.target.value)} 
+    <>
+      <div className='wrapper'>
+        <form onSubmit={handleSubmit}>
+          <img
+            src="https://b2597467.smushcdn.com/2597467/wp-content/uploads/logo-redsalud-dental-blanco.png?lossy=1&strip=1&webp=1"
+            alt="LogoLogin"
+            className="LogoLogin"
           />
-          <FaUser className='icon' />
-        </div>
-        <div className='input-box mt-2'>
-          <input
-            type="password"
-            placeholder='Contraseña'
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <RiLockPasswordFill className='icon' />
-        </div>
+          <div className='input-box'>
+            <input
+              type="text"
+              placeholder='Usuario'
+              required
+              value={rut}
+              onChange={(e) => setRut(e.target.value)} 
+            />
+            <FaUser className='icon' />
+          </div>
+          <div className='input-box mt-2'>
+            <input
+              type="password"
+              placeholder='Contraseña'
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <RiLockPasswordFill className='icon' />
+          </div>
 
-        <div className='remember-forgot'>
-          <label><input type="checkbox" /> Recordarme</label>
-          <a href="#">Olvidé mi contraseña</a>
-        </div>
+          <div className='remember-forgot'>
+            <label><input type="checkbox" /> Recordarme</label>
+            <a href="#">Olvidé mi contraseña</a>
+          </div>
 
-        {error && <p className="error-message">{error}</p>}
-        
-        <button type="submit">Ingresar</button>
-      </form>
-    </div>
+          {error && <p className="error-message">{error}</p>}
+          
+          <button type="submit">Ingresar</button>
+        </form>
+      </div>
+
+      {/* Contenedor de notificaciones */}
+      <ToastContainer />
+    </>
   );
 };
 
-export default LoginForm;
+export default LoginForm;
