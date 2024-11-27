@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './LoginForm.css';
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const LoginForm = () => {
   const [rut, setrut] = useState('');
@@ -20,17 +22,48 @@ export const LoginForm = () => {
         },
         body: JSON.stringify({ rut, password }),
       });
-
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        alert('Inicio de sesión exitoso');
-        window.location.href = '/dashboard';
+
+        // Mostrar notificación de éxito
+        toast.success('Inicio de sesión exitoso', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        // Redirigir después de 3 segundos
+        setTimeout(() => {
+          window.location.href = '/dashboard';
+        }, 3000);
       } else {
-        setError('Usuario o contraseña incorrectos');
+        // Mostrar notificación de error
+        toast.error('Usuario o contraseña incorrectos', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     } catch (err) {
-      setError('Error al conectar con el servidor');
+      // Mostrar notificación de error de conexión
+      toast.error('Error al conectar con el servidor', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -45,7 +78,7 @@ export const LoginForm = () => {
         <div className='input-box'>
           <input
             type="text"
-            placeholder='Usuariosss'
+            placeholder='Usuario'
             required
             value={rut}
             onChange={(e) => setrut(e.target.value)} 
@@ -76,6 +109,9 @@ export const LoginForm = () => {
           <p>¿No tienes una cuenta? <a href="#">Registrarse</a></p>
         </div>
       </form>
+      
+      {/* Contenedor de notificaciones */}
+      <ToastContainer />
     </div>
   );
 };

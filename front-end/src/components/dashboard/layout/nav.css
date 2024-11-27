@@ -9,13 +9,13 @@
 
 .header-nav .nav-icon {
     font-size: 25px;
-    color: #333;
+    color: #ffffff;
     margin-right: 25px;
     position: relative;
 }
 
 .header-nav .nav-profile {
-    color: #333;
+    color: #ffffff;
 }
 
 .header-nav .nav-profile img {
@@ -127,7 +127,7 @@
     font-size: 20px;
     margin-bottom: 0;
     font-weight: 600;
-    color: #333;
+    color: #bbbbbb;
     padding-left: 65px;
 }
 

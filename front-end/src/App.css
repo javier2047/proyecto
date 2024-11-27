@@ -18,7 +18,8 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--bgColor);
   color: #444444;
-  }
+}
+
 a{
   color: var(--primary);
   text-decoration: none;
