@@ -91,7 +91,7 @@ export const LoginForm = () => {
 
           <div className="remember-forgot">
             <label><input type="checkbox" /> Recordarme</label>
-            <a href="http://localhost:5173/password">Olvidé mi contraseña</a>
+            <a href="http://localhost:5173/correo">Olvidé mi contraseña</a>
           </div>
           
           <button type="submit">Ingresar</button>
