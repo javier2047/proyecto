@@ -1,17 +1,19 @@
 .sidebar{
     position: fixed;
-    top: 60px;
+    top: 0; /* Mantén la posición consistente con el diseño */
     left: 0;
     bottom: 0;
     width: 300px;
     z-index: 996;
-    transition: all 0.3s ease-in-out;
     padding: 20px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #aab7cf transparent;
-    box-shadow: 0px 0px 20px rgba(1, 41, 112,0.1);
-    background-color: #fff;
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+    backdrop-filter: blur(5px); /* Difumina el fondo */
+    color: white; /* Texto blanco para contraste */
+    transition: all 0.3s ease-in-out; /* Garantizar movimiento suave */
 }
 
 #main, #footer {
@@ -21,6 +23,7 @@
 @media (min-width: 300px) {
     .sidebar{
         left: -300px;
+        transition: all 0.3s ease-in-out; /* Movimiento suave al esconder */
     }
 
     .toggle-sidebar .sidebar{
@@ -38,7 +41,7 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background-color: #aab7cf;
+    background-color: #9ad0ae; /* Scroll consistente */
 }
 
 @media (min-width: 1200px) {
@@ -65,7 +68,7 @@
 
 .sidebar-nav {
     padding: 0;
-    margin: 0;
+    margin-top: 40px;
     list-style: none;
 }
 
@@ -88,11 +91,12 @@
     align-items: center;
     font-size: 18px;
     font-weight: 600;
-    color: #333;
-    transition: 0.3;
-    background: #f6f9ff;
-    padding: px 15px;
+    color: white; /* Texto blanco */
+    background: transparent; /* Fondo transparente */
+    transition: all 0.3s ease-in-out;
+    padding: 10px 15px;
     border-radius: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra ligera */
 }
 
 .sidebar-nav .nav-link i{
@@ -111,8 +115,8 @@
 }
 
 .sidebar-nav .nav-link:hover{
-    background: #333;
-    color: #fff;
+    background: rgba(255, 255, 255, 0.2); /* Hover con fondo más claro */
+    color: white; /* Texto blanco */
 }
 
 .sidebar-nav .nav-link:hover i{
