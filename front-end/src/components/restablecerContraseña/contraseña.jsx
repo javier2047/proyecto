@@ -19,6 +19,7 @@ function ResetPassword() {
     setIsLoading(true);
 
     try {
+      // Primera solicitud: Cambiar contraseña
       const response = await fetch(
         "http://127.0.0.1:8000/api/v1/auth/users/reset_password_confirm/",
         {
@@ -34,6 +35,9 @@ function ResetPassword() {
 
       if (response.ok) {
         setMessage("¡Contraseña restablecida con éxito!");
+
+        // Segunda solicitud: Enviar correo de confirmación
+        await sendConfirmationEmail(result.email || "user@example.com"); // Usa el correo del usuario, si está disponible en la respuesta
       } else {
         setMessage(result.error || "Hubo un problema al restablecer la contraseña.");
       }
@@ -41,6 +45,27 @@ function ResetPassword() {
       setMessage("Error en la solicitud. Intenta nuevamente.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // Función para enviar correo de confirmación
+  const sendConfirmationEmail = async (email) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/v1/auth/send_confirmation_email/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setMessage((prev) => `${prev} Se ha enviado un correo de confirmación.`);
+      } else {
+        console.error("Error al enviar el correo de confirmación.");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud del correo de confirmación:", error);
     }
   };
 

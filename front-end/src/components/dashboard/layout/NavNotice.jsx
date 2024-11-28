@@ -23,9 +23,9 @@ function NavNotice() {
             <li className='notification-item'>
                 <i className='bi bi-exclamation-circle text-warning'></i>
                 <div>
-                    <h4>Lorem Ipsum</h4>
-                    <p>Quae dolorem earum veritatis oditseno</p>
-                    <p>30 min. ago</p>
+                    <h4>Tienes una pendiente una aprobacion</h4>
+                    <p>Se te ha enviado una solicitud para anular la hora de Guillermo Lafourcade a las 13:25 del 12/12/2024</p>
+                    <p>Hace 30 minutos</p>
                 </div>
             </li>
             <li>
@@ -35,9 +35,9 @@ function NavNotice() {
             <li className='notification-item'>
                 <i className='bi bi-exclamation-circle text-danger'></i>
                 <div>
-                    <h4>Atque rerum nesciunt</h4>
-                    <p>Quae dolorem earum veritatis oditseno</p>
-                    <p>1 hr. ago</p>
+                    <h4>Haz cancelado una hora medica</h4>
+                    <p>Haz cancelado la solicitud de Francisca Figueroa para las 13:30 de 01/12/2024</p>
+                    <p>Hace 2 horas y 08 minutos</p>
                 </div>
             </li>
 
@@ -48,16 +48,16 @@ function NavNotice() {
             <li className='notification-item'>
                 <i className='bi bi-exclamation-circle text-success'></i>
                 <div>
-                    <h4>Sit rerum fuga</h4>
-                    <p>Quae dolorem earum veritatis oditseno</p>
-                    <p>2 hr. ago</p>
+                    <h4>Haz Aprobado la cancelacion de:</h4>
+                    <p>Haz aprobado la cancelacion de Rodrigo Prado para las 16:00 29/11/2024</p>
+                    <p>Hace 2 horas</p>
                 </div>
             </li>
             <li>
                 <hr className='dropdown-divider'/>
             </li>
             <li className='dropdown-footer'>
-                <a href="#">Show All Notifications</a>
+                <a href="#">Ver mas notificaciones</a>
             </li>
         </ul>
     </li>

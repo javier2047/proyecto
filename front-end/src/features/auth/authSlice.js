@@ -13,6 +13,7 @@ const initialState = {
     message: "",
 }
 
+
 export const register = createAsyncThunk(
     "auth/register",
     async (userData, thunkAPI) => {
@@ -84,16 +85,28 @@ export const resetPasswordConfirm = createAsyncThunk(
     "auth/resetPasswordConfirm",
     async (userData, thunkAPI) => {
         try {
-            return await authService.resetPasswordConfirm(userData)
-        } catch (error) {
-            const message = (error.response && error.response.data
-                && error.response.data.message) ||
-                error.message || error.toString()
-
-            return thunkAPI.rejectWithValue(message)
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/v1/auth/users/reset_password_confirm/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
         }
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al restablecer contraseña");
+      }
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
-)
+  }
+);
 
 export const getUserInfo = createAsyncThunk(
     "auth/getUserInfo",
