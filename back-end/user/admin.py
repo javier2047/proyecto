@@ -15,7 +15,7 @@ class UsuariosAdmin(BaseUserAdmin):
     list_display = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor','is_active','is_staff']
     list_display_links = ['rut']
     list_filter = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor','is_active','is_staff']
-    search_fields = ['rut','nombre','apellido','segundoapellido','email','tipousuario']
+    search_fields = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor']
 
     fieldsets = (
         (
@@ -26,7 +26,7 @@ class UsuariosAdmin(BaseUserAdmin):
         (
             _("Personal Information"),
             {
-                "fields": ('nombre', 'apellido','segundoapellido','email','tipousuario')
+                "fields": ('nombre', 'apellido','segundoapellido','email','tipousuario','especialidad','nombresupervisor','apellidosupervisor')
             },
         ),
         (

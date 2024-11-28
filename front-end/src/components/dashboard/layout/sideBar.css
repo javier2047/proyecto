@@ -1,9 +1,9 @@
 .sidebar{
     position: fixed;
-    top: 0; /* Mantén la posición consistente con el diseño */
+    top: 80px; /* Mantén la posición consistente con el diseño */
     left: 0;
-    bottom: 0;
-    width: 300px;
+    border-top-right-radius: 30px;
+    width: 250px;
     z-index: 996;
     padding: 20px;
     overflow-y: auto;
@@ -11,7 +11,7 @@
     scrollbar-color: #aab7cf transparent;
     box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
     background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
-    backdrop-filter: blur(5px); /* Difumina el fondo */
+    backdrop-filter: blur(50px); /* Difumina el fondo */
     color: white; /* Texto blanco para contraste */
     transition: all 0.3s ease-in-out; /* Garantizar movimiento suave */
 }

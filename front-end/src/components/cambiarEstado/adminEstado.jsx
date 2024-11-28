@@ -24,7 +24,7 @@ function AdminEstado() {
           motivo: item.motivo,
           especialidad: item.especialidad || "General", // Valor predeterminado
           unidad: item.unidad || "Unidad desconocida", // Valor predeterminado
-          estado: "Pendiente",
+          estado: "pendiente",
         }));
         setData(extractedData);
       } catch (err) {
@@ -43,7 +43,7 @@ function AdminEstado() {
     if (confirmAction) {
       try {
         const item = data[index];
-        const updatedEstado = accion === "Aceptar" ? "Aceptado" : "Rechazado";
+        const updatedEstado = accion === "aceptar" ? "aceptado" : "rechazado";
 
         // Realizar el POST a la API con los datos requeridos
         await axios.post(apiUrl, {
@@ -128,9 +128,9 @@ function AdminEstado() {
                     <td>
                       <button
                         className={`btn btn-sm ${
-                          row.estado === "Pendiente"
+                          row.estado === "pendiente"
                             ? "btn-warning"
-                            : row.estado === "Aceptado"
+                            : row.estado === "aceptado"
                             ? "btn-success"
                             : "btn-danger"
                         }`}
@@ -143,15 +143,15 @@ function AdminEstado() {
                       <div className="d-flex gap-2">
                         <button
                           className="btn btn-success btn-sm"
-                          onClick={() => handleAccion(index, "Aceptar")}
-                          disabled={row.estado !== "Pendiente"}
+                          onClick={() => handleAccion(index, "aceptar")}
+                          disabled={row.estado !== "pendiente"}
                         >
                           Aceptar
                         </button>
                         <button
                           className="btn btn-danger btn-sm"
-                          onClick={() => handleAccion(index, "Rechazar")}
-                          disabled={row.estado !== "Pendiente"}
+                          onClick={() => handleAccion(index, "rechazar")}
+                          disabled={row.estado !== "pendiente"}
                         >
                           Rechazar
                         </button>

@@ -16,10 +16,9 @@ import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
 import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
-import RequestPasswordReset from '@components/enviarSolicitud/correo';  // Note: fixed path typo
+import RequestPasswordReset from '@components/enviarSolicitud/correo';
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 import ActivatePage from '@routes/ActivatePage';
-
 // Definición de las rutas
 const router = createBrowserRouter([
   {
@@ -43,7 +42,7 @@ const router = createBrowserRouter([
     element: <AdminEstado />, // Ruta para cambiar estado
   },
   {
-    path: '/password',
+    path: '/password/reset/confirm/:uid/:token',
     element: <ResetPassword />, // Ruta para restablecer contraseña
   },
   {

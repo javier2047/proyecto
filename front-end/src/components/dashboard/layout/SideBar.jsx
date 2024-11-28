@@ -15,7 +15,7 @@ function SideBar() {
         <li className="nav-item">
           <a className="nav-link" href="/estado">
             <i className="bi bi-calendar-check"></i>
-            <span>Admin.Cancelaciones</span>
+            <span>Mis Cancelaciones</span>
           </a>
         </li>
         {/* <li className="nav-heading">Pages</li>

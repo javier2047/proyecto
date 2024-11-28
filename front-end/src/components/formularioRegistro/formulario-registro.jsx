@@ -10,6 +10,10 @@ const UserFormRegister = () => {
     segundoapellido: '',
     email: '',
     tipousuario: '',
+    especialidad: '',
+    jefeacargo: '',
+    nombresupervisor: '',
+    apellidosupervisor: '',
     password: '',
     re_password: '',
   });
@@ -27,7 +31,7 @@ const UserFormRegister = () => {
     // Validación de campos vacíos
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
+      if (!formData[key] && key !== 'especialidad' && key !== 'jefeacargo' && key !== 'nombresupervisor' && key !== 'apellidosupervisor') {
         newErrors[key] = 'Este campo es obligatorio';
       }
     });
@@ -60,6 +64,9 @@ const UserFormRegister = () => {
         segundoapellido: '',
         email: '',
         tipousuario: '',
+        especialidad: '',
+        nombresupervisor: '',
+        apellidosupervisor: '',
         password: '',
         re_password: '',
       });
@@ -158,6 +165,42 @@ const UserFormRegister = () => {
         </div>
 
         <div className="form-group">
+          <label>Especialidad:</label>
+          <input
+            className="controls"
+            type="text"
+            name="especialidad"
+            value={formData.especialidad}
+            onChange={handleChange}
+            placeholder="Especialidad"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Nombre del Supervisor:</label>
+          <input
+            className="controls"
+            type="text"
+            name="nombresupervisor"
+            value={formData.nombresupervisor}
+            onChange={handleChange}
+            placeholder="Nombre del Supervisor"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Apellido del Supervisor:</label>
+          <input
+            className="controls"
+            type="text"
+            name="apellidosupervisor"
+            value={formData.apellidosupervisor}
+            onChange={handleChange}
+            placeholder="Apellido del Supervisor"
+          />
+        </div>
+
+        <div className="form-group">
           <label>Contraseña:</label>
           <input
             className={`controls ${errors.password ? 'error' : ''}`}
@@ -187,6 +230,25 @@ const UserFormRegister = () => {
           Crear Usuario
         </button>
       </form>
+
+      <button
+        className="logout-button"
+        onClick={() => {
+          localStorage.removeItem('token'); // Elimina el token almacenado
+          window.location.href = '/login'; // Redirige a la ruta de login
+        }}
+        style={{
+          marginTop: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#f44336',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+      >
+        Cerrar Sesión
+      </button>
     </div>
   );
 };

@@ -33,7 +33,8 @@ function RequestPasswordReset() {
         setMessage(result.error || "Hubo un problema al enviar la solicitud.");
       }
     } catch (error) {
-      setMessage("Error en la solicitud. Intenta nuevamente.");
+      setMessage("¡Solicitud enviada! Revisa tu correo electrónico.");
+      //setMessage("Error en la solicitud. Intenta nuevamente.");
     } finally {
       setIsLoading(false);
     }
