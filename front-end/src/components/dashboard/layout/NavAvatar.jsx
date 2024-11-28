@@ -57,7 +57,7 @@ function NavAvatar() {
         <li>
           <a
             className='dropdown-item d-flex align-items-center'
-            href='Login.html'
+            href='/login'
           >
             <i className='bi bi-box-arrow-right'></i>
             <span>Salir</span>

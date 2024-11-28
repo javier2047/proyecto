@@ -10,6 +10,10 @@ const UserFormRegister = () => {
     segundoapellido: '',
     email: '',
     tipousuario: '',
+    especialidad: '',
+    jefeacargo: '',
+    nombresupervisor: '',
+    apellidosupervisor: '',
     password: '',
     re_password: '',
   });
@@ -27,7 +31,7 @@ const UserFormRegister = () => {
     // Validación de campos vacíos
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
+      if (!formData[key] && key !== 'especialidad' && key !== 'jefeacargo' && key !== 'nombresupervisor' && key !== 'apellidosupervisor') {
         newErrors[key] = 'Este campo es obligatorio';
       }
     });
@@ -60,6 +64,9 @@ const UserFormRegister = () => {
         segundoapellido: '',
         email: '',
         tipousuario: '',
+        especialidad: '',
+        nombresupervisor: '',
+        apellidosupervisor: '',
         password: '',
         re_password: '',
       });
@@ -75,7 +82,7 @@ const UserFormRegister = () => {
     <div className="form-container">
       <form className="form-register" onSubmit={handleSubmit}>
         <div className="form-title">Formulario de Registro</div>
-  
+
         <div className="form-group">
           <label>RUT:</label>
           <input
@@ -88,7 +95,7 @@ const UserFormRegister = () => {
           />
           {errors.rut && <span className="error-message">{errors.rut}</span>}
         </div>
-  
+
         <div className="form-group">
           <label>Nombre:</label>
           <input
@@ -101,7 +108,7 @@ const UserFormRegister = () => {
           />
           {errors.nombre && <span className="error-message">{errors.nombre}</span>}
         </div>
-  
+
         <div className="form-group">
           <label>Apellido:</label>
           <input
@@ -114,7 +121,7 @@ const UserFormRegister = () => {
           />
           {errors.apellido && <span className="error-message">{errors.apellido}</span>}
         </div>
-  
+
         <div className="form-group">
           <label>Segundo Apellido:</label>
           <input
@@ -127,7 +134,7 @@ const UserFormRegister = () => {
           />
           {errors.segundoapellido && <span className="error-message">{errors.segundoapellido}</span>}
         </div>
-  
+
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -140,7 +147,7 @@ const UserFormRegister = () => {
           />
           {errors.email && <span className="error-message">{errors.email}</span>}
         </div>
-  
+
         <div className="form-group">
           <label>Tipo de Usuario:</label>
           <select
@@ -156,7 +163,43 @@ const UserFormRegister = () => {
           </select>
           {errors.tipousuario && <span className="error-message">{errors.tipousuario}</span>}
         </div>
-  
+
+        <div className="form-group">
+          <label>Especialidad:</label>
+          <input
+            className="controls"
+            type="text"
+            name="especialidad"
+            value={formData.especialidad}
+            onChange={handleChange}
+            placeholder="Especialidad"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Nombre del Supervisor:</label>
+          <input
+            className="controls"
+            type="text"
+            name="nombresupervisor"
+            value={formData.nombresupervisor}
+            onChange={handleChange}
+            placeholder="Nombre del Supervisor"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Apellido del Supervisor:</label>
+          <input
+            className="controls"
+            type="text"
+            name="apellidosupervisor"
+            value={formData.apellidosupervisor}
+            onChange={handleChange}
+            placeholder="Apellido del Supervisor"
+          />
+        </div>
+
         <div className="form-group">
           <label>Contraseña:</label>
           <input
@@ -169,7 +212,7 @@ const UserFormRegister = () => {
           />
           {errors.password && <span className="error-message">{errors.password}</span>}
         </div>
-  
+
         <div className="form-group">
           <label>Confirmar Contraseña:</label>
           <input
@@ -182,12 +225,12 @@ const UserFormRegister = () => {
           />
           {errors.re_password && <span className="error-message">{errors.re_password}</span>}
         </div>
-  
+
         <button className="submit-button" type="submit">
           Crear Usuario
         </button>
       </form>
-  
+
       <button
         className="logout-button"
         onClick={() => {
@@ -208,7 +251,6 @@ const UserFormRegister = () => {
       </button>
     </div>
   );
-  
 };
 
 export default UserFormRegister;

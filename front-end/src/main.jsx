@@ -19,7 +19,6 @@ import Formulario from '@components/formulario/formulario';
 import RequestPasswordReset from '@components/enviarSolicitud/correo';
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 import ActivatePage from '@routes/ActivatePage';
-
 // Definición de las rutas
 const router = createBrowserRouter([
   {

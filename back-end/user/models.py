@@ -32,7 +32,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     
     objects = managesusuario()
     USERNAME_FIELD = 'rut'
-    REQUIRED_FIELDS = ['nombre','apellido','segundoapellido','email','tipousuario']
+    REQUIRED_FIELDS = ['nombre','apellido','segundoapellido','email','tipousuario', 'especialidad','nombresupervisor','apellidosupervisor']
     
     
     
