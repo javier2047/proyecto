@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import './formularioRegistro.css';
 
@@ -11,7 +11,7 @@ const UserFormRegister = () => {
     email: '',
     tipousuario: '',
     especialidad: '',
-    jefeacargo: '',
+    rutsupervisor: '', 
     nombresupervisor: '',
     apellidosupervisor: '',
     password: '',
@@ -31,7 +31,11 @@ const UserFormRegister = () => {
     // Validación de campos vacíos
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'especialidad' && key !== 'jefeacargo' && key !== 'nombresupervisor' && key !== 'apellidosupervisor') {
+      if (!formData[key] && 
+        key !== 'especialidad' && 
+        key !== 'nombresupervisor' && 
+        key !== 'apellidosupervisor' &&
+      key!== 'rutsupervisor') {
         newErrors[key] = 'Este campo es obligatorio';
       }
     });
@@ -45,16 +49,18 @@ const UserFormRegister = () => {
 
     // Evitar enviar si hay errores
     if (Object.keys(newErrors).length > 0) {
+      console.log('Errores detectados:', newErrors)
       return;
     }
 
     try {
       // Elimina el campo `re_password` antes de enviar la solicitud
-      const { re_password, ...dataToSubmit } = formData;
+      const { ...dataToSubmit } = formData;
+      console.log('Datos enviados:', formData);
 
       // Enviar datos al backend
       const response = await axios.post(
-        'http://127.0.0.1:8000/api/v1/auth/users/?format=api', 
+        'http://127.0.0.1:8000/api/v1/auth/users/', 
         dataToSubmit,
         {
           headers: {
@@ -73,6 +79,8 @@ const UserFormRegister = () => {
           email: '',
           tipousuario: '',
           especialidad: '',
+          jefeacargo:'',
+          rutsupervisor: '',
           nombresupervisor: '',
           apellidosupervisor: '',
           password: '',
@@ -81,7 +89,7 @@ const UserFormRegister = () => {
         setErrors({});
       }
     } catch (error) {
-      console.error('Error enviando formulario:', error);
+      console.error('Error enviando formulario:', error.response?.data || error);
       alert('Error al enviar formulario');
     }
   };
@@ -92,7 +100,7 @@ const UserFormRegister = () => {
         <div className="form-title">Formulario de Registro</div>
 
         {/* Campos del formulario */}
-        {['rut', 'nombre', 'apellido', 'segundoapellido', 'email', 'tipousuario'].map((field) => (
+        {['rut', 'nombre', 'apellido', 'segundoapellido', 'email'].map((field) => (
           <div className="form-group" key={field}>
             <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
             <input
@@ -125,7 +133,7 @@ const UserFormRegister = () => {
         </div>
 
         {/* Campos adicionales */}
-        {['especialidad', 'nombresupervisor', 'apellidosupervisor'].map((field) => (
+        {['especialidad', 'rutsupervisor','nombresupervisor', 'apellidosupervisor'].map((field) => (
           <div className="form-group" key={field}>
             <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
             <input
@@ -150,12 +158,14 @@ const UserFormRegister = () => {
               value={formData[field]}
               onChange={handleChange}
               placeholder={field === 'password' ? 'Contraseña' : 'Confirmar Contraseña'}
+              required
             />
             {errors[field] && <span className="error-message">{errors[field]}</span>}
           </div>
         ))}
 
         <button className="submit-button" type="submit">
+          
           Crear Usuario
         </button>
       </form>
