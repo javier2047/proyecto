@@ -46,42 +46,6 @@ function NavAvatar() {
         <li>
           <a
             className='dropdown-item d-flex align-items-center'
-            href='users-profile.html'
-          >
-            <i className='bi bi-person'></i>
-            <span>Mi Perfil</span>
-          </a>
-        </li>
-        <li>
-          <hr className='dropdown-divider' />
-        </li>
-        <li>
-          <a
-            className='dropdown-item d-flex align-items-center'
-            href='users-profile.html'
-          >
-            <i className='bi bi-gear'></i>
-            <span>Configuracion</span>
-          </a>
-        </li>
-        <li>
-          <hr className='dropdown-divider' />
-        </li>
-        <li>
-          <a
-            className='dropdown-item d-flex align-items-center'
-            href='/login'
-          >
-            <i className='bi bi-question-circle'></i>
-            <span>¿Necesitas ayuda?</span>
-          </a>
-        </li>
-        <li>
-          <hr className='dropdown-divider' />
-        </li>
-        <li>
-          <a
-            className='dropdown-item d-flex align-items-center'
             onClick={handleLogout}
             href='/login'
           >

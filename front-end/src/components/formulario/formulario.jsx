@@ -45,7 +45,6 @@ const Formulario = () => {
         setLoading(true);
         const userInfoArray = await fetchUserInfo();
         const userInfo = userInfoArray[0];
-        console.log('loadUserInfo: Data: ', userInfo)
         setFormData((prevFormData) => ({
           ...prevFormData,
           nombre: userInfo.nombre || '',
@@ -100,10 +99,6 @@ const Formulario = () => {
         estado: 'pendiente', // Campo requerido
         rutsupervisor: formData.rutsupervisor || 'nulo', // Valor predeterminado
       };
-
-      console.log('Datos enviados:', dataToSubmit)
-
-      console.log('Enviendo datos:', formData)
       await axios.post('http://localhost:8000/forms/api/forms1/forms/', formData, {
         headers: { 'Content-Type': 'application/json' },
       });
