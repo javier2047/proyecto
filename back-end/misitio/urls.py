@@ -26,7 +26,7 @@ urlpatterns = [
     path('forms/', include('forms.urls')),
     path('api/v1/auth/', include('djoser.urls')),
     path('api/v1/auth/', include('djoser.urls.jwt')),
-
+    #path('user/', include('user.urls')),
     #path('usuarios/',include('usuarios.urls')),
 
 ]

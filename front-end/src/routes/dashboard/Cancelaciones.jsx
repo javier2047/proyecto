@@ -39,6 +39,7 @@ function Cancelaciones() {
         setData(result);
         setFilteredData(result); // Inicialmente, muestra todos los datos
         setIsLoading(false);
+        console.log(result);
       } catch (error) {
         console.error("Error al obtener datos:", error);
         setIsLoading(false);

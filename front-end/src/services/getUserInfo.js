@@ -1,16 +1,23 @@
 import axios from 'axios';
 
-const fetchData = async () => {
+export const fetchUserInfo = async () => {
   try {
+    const token = localStorage.getItem('token'); // Recupera el token
+
+    if (!token) {
+      throw new Error('Token no disponible. Por favor, inicie sesión nuevamente.');
+    }
+
+    // Solicitud al backend para obtener información del usuario
     const response = await axios.get('http://127.0.0.1:8000/api/v1/auth/users/', {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyNzI4MDQwLCJpYXQiOjE3MzI3MjA4NDAsImp0aSI6IjA1MTM0MWI4N2RiMzQyNjVhMzI4ODk4NzBmMTI0NmU3IiwidXNlcl9pZCI6OH0.vyLIjPu4ur2OHEp_qSUo0ikc6sPwIlTP-kwF7_s9G6A`,
+        Authorization: `Bearer ${token}`, // Envía el token en el encabezado
       },
     });
-    console.log(response.data);
+    console.log('fetchUserInfo: Datos obtenidos:', response.data);
+    return response.data; // Devuelve los datos del usuario
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error en fetchUserInfo:', error);
+    throw error; // Lanza el error para manejarlo en el componente
   }
 };
-
-fetchData();

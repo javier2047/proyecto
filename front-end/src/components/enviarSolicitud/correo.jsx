@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function RequestPasswordReset() {
   const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ function RequestPasswordReset() {
       } else {
         setMessage(result.error || "Hubo un problema al enviar la solicitud.");
       }
-    } catch (error) {
+    } catch {
       setMessage("¡Solicitud enviada! Revisa tu correo electrónico.");
       //setMessage("Error en la solicitud. Intenta nuevamente.");
     } finally {

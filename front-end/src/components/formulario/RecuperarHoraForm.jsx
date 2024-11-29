@@ -6,6 +6,8 @@ const RecuperarHoraForm = () => {
   const [formData, setFormData] = useState({
     Nombre: '',
     Rangodefecha: '',
+    FechaDesde: '',
+    FechaHasta: '',
   });
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -25,7 +27,7 @@ const RecuperarHoraForm = () => {
       await axios.post('http://127.0.0.1:8000/tasks/api/v1/tasks/', formData);
       setSuccessMessage('Solicitud de recuperación de hora médica enviada exitosamente.');
       setTimeout(() => setSuccessMessage(''), 3000); // Limpiamos el mensaje después de 3 segundos
-      setFormData({ Nombre: '', Rangodefecha: '' }); // Limpiamos el formulario
+      setFormData({ Nombre: '', Rangodefecha: '', FechaDesde: '', FechaHasta: '' }); // Limpiamos el formulario
     } catch (error) {
       setErrorMessage('Hubo un error al enviar la solicitud. Inténtalo de nuevo.');
       console.error('Error al enviar solicitud de recuperación de hora médica:', error);
@@ -55,13 +57,35 @@ const RecuperarHoraForm = () => {
         </div>
 
         <div className="form-group">
-          <label>Rango de Fechas a Recuperar:</label>
+          <label>Comentario:</label>
           <input
             type="text"
             name="Rangodefecha"
             value={formData.Rangodefecha}
             onChange={handleChange}
             placeholder="Escribe el rango de fechas"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Fecha Desde:</label>
+          <input
+            type="date"
+            name="FechaDesde"
+            value={formData.FechaDesde}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Fecha Hasta:</label>
+          <input
+            type="date"
+            name="FechaHasta"
+            value={formData.FechaHasta}
+            onChange={handleChange}
             required
           />
         </div>
