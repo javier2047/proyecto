@@ -212,5 +212,5 @@ EMAIL_PORT = ("2525")
 EMAIL_HOST_USER = ("75fde047458c54")
 EMAIL_HOST_PASSWORD = ("80a5041e9eadfd")
 DEFAULT_FROM_EMAIL = "info@journal-bullet.com"
-DOMAIN = ("localhost:5173", "http://localhost:5174")
+DOMAIN = ("localhost:5173",)
 SITE_NAME = "pedro sanches"

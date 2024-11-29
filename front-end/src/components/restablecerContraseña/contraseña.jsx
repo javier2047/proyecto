@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 function ResetPassword() {
   const { uid, token } = useParams(); // Captura uid y token desde la URL
-  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +36,7 @@ function ResetPassword() {
         setMessage("¡Contraseña restablecida con éxito!");
 
         // Segunda solicitud: Enviar correo de confirmación
-        await sendConfirmationEmail(result.email || "user@example.com"); // Usa el correo del usuario, si está disponible en la respuesta
+        await sendConfirmationEmail(result.email || "user@example.com");
       } else {
         setMessage(result.error || "Hubo un problema al restablecer la contraseña.");
       }
