@@ -8,7 +8,15 @@ import './formulario.css';
 import { fetchUserInfo } from '@services/getUserInfo';
 import { logout } from '@auth/authService';
 
+const formatDate = (date) => {
+  const d = new Date(date);
+  return d.toISOString().split('T')[0]; // Formato "YYYY-MM-DD"
+};
 
+const formatTime = (time) => {
+  const [hours, minutes] = time.split(':');
+  return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`; // Formato "HH:MM:SS"
+};
 const Formulario = () => {
   const navigate = useNavigate();  // Inicializa useNavigate
   const [formData, setFormData] = useState({
@@ -32,7 +40,6 @@ const Formulario = () => {
   
 
   useEffect(() => {
-    console.log('useEffect: montandocomponent y llamando a loadUserInfo...')
     const loadUserInfo = async () => {
       try {
         setLoading(true);
@@ -45,11 +52,10 @@ const Formulario = () => {
           apellido: userInfo.apellido || '',
           segundoapellido: userInfo.segundoapellido || '',
           especialidad: userInfo.especialidad || '',
+          rutsupervisor: userInfo.rutsupervisor || '',
         }));
-        console.log('loadUserInfo: Estado act:',formData);
       }catch (err){
         setError(err.message || 'No se pudo cargar la información del usuario');
-        console.error('LoadUserInfo: Error:', err)
       }finally{
         setLoading(false);
       }
@@ -85,7 +91,22 @@ const Formulario = () => {
   const handleConfirmEnvio = async () => {
     setLoading(true);
     try {
-      await axios.post('http://localhost:8000/forms/api/forms1/forms/', formData);
+      const dataToSubmit = {
+        ...formData,
+        fecha_inicio: formatDate(formData.fecha_inicio),
+        hora_inicio: formatTime(formData.hora_inicio),
+        fecha_fin: formatDate(formData.fecha_fin),
+        hora_fin: formatTime(formData.hora_fin),
+        estado: 'pendiente', // Campo requerido
+        rutsupervisor: formData.rutsupervisor || 'nulo', // Valor predeterminado
+      };
+
+      console.log('Datos enviados:', dataToSubmit)
+
+      console.log('Enviendo datos:', formData)
+      await axios.post('http://localhost:8000/forms/api/forms1/forms/', formData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
       setFormData({
         nombre: '',
         apellido: '',
@@ -96,7 +117,8 @@ const Formulario = () => {
         hora_fin: '',
         especialidad: '',
         unidad: '',
-        motivo: ''
+        motivo: '',
+        rutsupervisor: '',
       });
       setSuccessMessage('Formulario enviado exitosamente');
       setTimeout(() => setSuccessMessage(''), 3000);

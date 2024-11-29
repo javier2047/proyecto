@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './formularioRegistro.css';
+import { logout } from '@auth/authService';
 
 const UserFormRegister = () => {
   const [formData, setFormData] = useState({
@@ -93,9 +94,17 @@ const UserFormRegister = () => {
       alert('Error al enviar formulario');
     }
   };
-
+  const handleLogout = () =>{
+    logout();
+    window.location.href = '/login';
+  }
   return (
+    
     <div className="form-container">
+      {/* Botón de cerrar sesión */}
+      <button className="logout-button" onClick={handleLogout}>
+        Cerrar Sesión
+      </button>
       <form className="form-register" onSubmit={handleSubmit}>
         <div className="form-title">Formulario de Registro</div>
 
