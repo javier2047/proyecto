@@ -13,7 +13,7 @@ function Login() {
         setError("");
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/usuariosred/api/login/", {
+            const response = await axios.post("http://127.0.0.1:8000/api/v1/auth/jwt/create/", {
                 rut,
                 password,
             });

@@ -19,7 +19,7 @@ import Formulario from '@components/formulario/formulario';
 import RequestPasswordReset from '@components/enviarSolicitud/correo';
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 import ActivatePage from '@routes/ActivatePage';
-
+import AdminOpciones from '@components/Re-agenda/AdminOpciones';
 // Definición de las rutas
 const router = createBrowserRouter([
   {
@@ -61,6 +61,10 @@ const router = createBrowserRouter([
   {
     path: '/activate/:uid/:token',
     element: <ActivatePage />, // Ruta para activar la cuenta
+  },
+  {
+    path: '/adminOpciones',
+    element: <AdminOpciones/>, // Ruta para activar la cuenta
   },
 ]);
 

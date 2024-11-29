@@ -112,17 +112,19 @@ export const getUserInfo = createAsyncThunk(
     "auth/getUserInfo",
     async (_, thunkAPI) => {
         try {
-            const accessToken = thunkAPI.getState().auth.user.access
-            return await authService.getUserInfo(accessToken)
+            const accessToken = thunkAPI.getState().auth.user.access; // Verifica si esta línea obtiene el token
+            console.log("Token enviado a getUserInfo:", accessToken);
+            return await authService.getUserInfo(accessToken);
         } catch (error) {
-            const message = (error.response && error.response.data
-                && error.response.data.message) ||
-                error.message || error.toString()
-
-            return thunkAPI.rejectWithValue(message)
+            const message =
+                (error.response && error.response.data?.message) ||
+                error.message ||
+                "Error desconocido al obtener información del usuario";
+            console.error("Error en getUserInfo:", message);
+            return thunkAPI.rejectWithValue(message);
         }
     }
-)
+);
 
 
 export const authSlice = createSlice({

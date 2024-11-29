@@ -35,6 +35,6 @@ class Formularios(models.Model):
     unidad = models.CharField (max_length= 50)
     motivo = models.CharField(max_length=20)
     estado = models.CharField(max_length=20, default='pendiente')
-
+    rutsupervisor = models.CharField(max_length=20, default='nulo')
     def __str__(self):
         return f"Suspensión de {self.nombre} {self.apellido}  desde {self.fecha_inicio} {self.hora_inicio or ''} hasta {self.fecha_fin} {self.hora_fin or ''} {self.estado}"
