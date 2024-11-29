@@ -18,6 +18,12 @@ function SideBar() {
             <span>Mis Cancelaciones</span>
           </a>
         </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/adminOpciones">
+            <i className="bi bi-arrow-repeat"></i>
+            <span>Re Agenda</span>
+          </a>
+        </li>
         {/* <li className="nav-heading">Pages</li>
         {navList.map(nav=>(
           <NavItem key={nav._id} nav={nav} />
