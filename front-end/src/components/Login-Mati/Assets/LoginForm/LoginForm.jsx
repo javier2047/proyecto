@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './LoginForm.css';
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { fetchUserInfo } from '@services/getUserInfo';
 
 export const LoginForm = () => {
   const [rut, setRut] = useState('');
@@ -29,17 +30,9 @@ export const LoginForm = () => {
         localStorage.setItem('token', token);
 
         // Obtener información del usuario
-        const userResponse = await fetch('http://127.0.0.1:8000/api/v1/auth/users/', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (userResponse.ok) {
-          const userData = await userResponse.json();
-          const currentUser = userData.find((user) => user.rut === rut);
+        try {
+          const userInfo = await fetchUserInfo();
+          const currentUser = userInfo.find((user) => user.rut === rut);
           const userType = currentUser?.tipousuario;
 
           // Guardar la información del usuario en el contexto
@@ -54,14 +47,15 @@ export const LoginForm = () => {
           } else {
             setError('Tipo de usuario no reconocido.');
           }
-        } else {
+        }catch(userInfoError) {
           setError('Error al obtener la información del usuario.');
+          console.error('Error en fetchUserInfo', userInfoError)
         }
       } else {
         setError('Usuario o contraseña incorrectos.');
       }
     } catch (e) {
-      setError('Error al conectar con el servidor.');
+      setError('Error al conectar con el servidor.', e);
     }
   };
 
