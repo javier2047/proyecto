@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from email_service.api.views import email_Api_view
 
 
 
@@ -27,6 +28,9 @@ urlpatterns = [
     path('api/v1/auth/', include('djoser.urls')),
     path('api/v1/auth/', include('djoser.urls.jwt')),
     #path('user/', include('user.urls')),
-    #path('usuarios/',include('usuarios.urls')),
-
+    #path('usuarios/',include('usuarios.urls')),\
+    #El de abajo, fue para el primer intento.
+    #path('send-email', email_Api_view.as_view(), name='send-email') 
+    #Este es el que estaba usando ahora al ultimo.
+     path('forms/api/email/', email_Api_view.as_view(), name='email-api')
 ]

@@ -102,6 +102,11 @@ const Formulario = () => {
       await axios.post('http://localhost:8000/forms/api/forms1/forms/', formData, {
         headers: { 'Content-Type': 'application/json' },
       });
+      //Esto de abajo es lo que toma el campo de correo para la api, corri un ejemplo y me dejo enviar el formulario.
+      // Pero no envio el correo, intente un par de veces mas pero nada.
+      await axios.post('http://localhost:8000/forms/api/email/', { email: formData.email }, {
+        headers: { 'Content-Type': 'application/json' },
+      });
       setFormData({
         nombre: '',
         apellido: '',
@@ -208,6 +213,21 @@ const Formulario = () => {
                 />
               </div>
             </section>
+              <section className="form-section">
+                <h3>Contacto</h3>
+                <div className="form-group">
+                  <label>Email:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Ingrese su correo electrónico"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </section>
+
   
             {/* Sección: Fechas y Horarios */}
             <section className="form-section">
