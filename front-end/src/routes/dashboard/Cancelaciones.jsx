@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCancelaciones } from "../../services/apiServiceDashboard";
 import { Bar } from "react-chartjs-2";
+import { fetchUserInfo } from "@services/getUserInfo";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -30,24 +32,34 @@ function Cancelaciones() {
   const [filterValue1, setFilterValue1] = useState(""); // Primer valor del filtro
   const [filterField2, setFilterField2] = useState("unidad"); // Segundo campo para filtrar
   const [filterValue2, setFilterValue2] = useState(""); // Segundo valor del filtro
+  const [rutSupervisor, setRutSupervisor] = useState("");
 
   // Carga inicial de datos
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
+        //obtener rut del usuario en sesion
+        const userInfoArray = await fetchUserInfo();
+        const userInfo = userInfoArray[0]
+        setRutSupervisor(userInfo.rut);
+
         const result = await getCancelaciones();
-        setData(result);
-        setFilteredData(result); // Inicialmente, muestra todos los datos
+
+        const cancelacionesSubordinados = result.filter(
+          (item) => item.rutsupervisor === rutSupervisor
+        )
+        setData(cancelacionesSubordinados);
+        setFilteredData(cancelacionesSubordinados); // Inicialmente, muestra todos los datos
         setIsLoading(false);
-        console.log(result);
-      } catch (error) {
-        console.error("Error al obtener datos:", error);
+
+      } catch {
         setIsLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [rutSupervisor]);
 
   // Actualiza el gráfico cuando los datos filtrados cambian
   useEffect(() => {
@@ -137,7 +149,7 @@ function Cancelaciones() {
         <div style={{ marginBottom: "20px" }}>
           {/* Selección del primer campo para filtrar */}
           <label>
-            Filtrar por (1):
+            Filtro 1:
             <select
               name="filterField1"
               value={filterField1}
@@ -173,7 +185,7 @@ function Cancelaciones() {
         <div style={{ marginBottom: "20px" }}>
           {/* Selección del segundo campo para filtrar */}
           <label>
-            Filtrar por (2):
+            Filtro 2:
             <select
               name="filterField2"
               value={filterField2}

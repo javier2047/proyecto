@@ -14,7 +14,6 @@ export const fetchUserInfo = async () => {
         Authorization: `Bearer ${token}`, // Envía el token en el encabezado
       },
     });
-    console.log('fetchUserInfo: Datos obtenidos:', response.data);
     return response.data; // Devuelve los datos del usuario
   } catch (error) {
     console.error('Error en fetchUserInfo:', error);

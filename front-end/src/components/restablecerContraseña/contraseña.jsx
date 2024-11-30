@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 function ResetPassword() {
@@ -41,7 +41,7 @@ function ResetPassword() {
       } else {
         setMessage(result.error || "Hubo un problema al restablecer la contraseña.");
       }
-    } catch (error) {
+    } catch {
       setMessage("Error en la solicitud. Intenta nuevamente.");
     } finally {
       setIsLoading(false);
@@ -51,7 +51,7 @@ function ResetPassword() {
   // Función para enviar correo de confirmación
   const sendConfirmationEmail = async (email) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/auth/send_confirmation_email/", {
+      const response = await fetch("http://127.0.0.1:8000/api/v1/auth/users/reset_password/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
