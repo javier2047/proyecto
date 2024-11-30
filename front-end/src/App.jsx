@@ -11,16 +11,11 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 //import Header from "@components/dashboard/layout/Header"
 
-import Formulario from '@components/formulario/formulario';
-//import Login from '@components/login/login';
-import UserFormRegister from '@components/formularioRegistro/formulario-registro'
-
 //Seba
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "@components/dashboard/layout/Header"; // Importación correcta
 import RequestPasswordReset from '@components/enviarSolicitud/correo';
-import ResetPassword from '@components/restablecerContraseña/contraseña'; // Página para restablecer contraseña
+import ResetPassword from '@components/restablecerContraseña/confirmarContrasena'; // Página para restablecer contraseña
 import Login from '@components/login/login'; // Página principal o login
 
 function App() {
