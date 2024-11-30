@@ -88,6 +88,10 @@ const resetPasswordConfirm = async (userData) => {
 
     const response = await axios.post(RESET_PASSWORD_CONFIRM_URL, userData, config)
 
+    if (response.status === 204) {
+        return { success: true, message: "Password reset successful" }; // Devuelve un objeto indicando el éxito
+      }
+      
     return response.data
 }
 
