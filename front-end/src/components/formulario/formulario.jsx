@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';  // Importa useNavigate
 import logoRedSalud from './logo_red_salud_497cf0b50b.png';
 import RecuperarHoraPopup from './RecuperarHoraPopup';
 import ConfirmacionEnvioPopup from './ConfirmacionEnvioPopup';
 import './formulario.css';
+import { fetchUserInfo } from '@services/getUserInfo';
+import { logout } from '@auth/authService';
+import { sendEmail } from '@services/sendEmailService';
 
+const formatDate = (date) => {
+  const d = new Date(date);
+  return d.toISOString().split('T')[0]; // Formato "YYYY-MM-DD"
+};
+
+const formatTime = (time) => {
+  const [hours, minutes] = time.split(':');
+  return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`; // Formato "HH:MM:SS"
+};
 const Formulario = () => {
   const navigate = useNavigate();  // Inicializa useNavigate
   const [formData, setFormData] = useState({
@@ -20,31 +32,89 @@ const Formulario = () => {
     unidad: '',
     motivo: ''
   });
+  const [userInfo, setuserInfo] = useState([])
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [showRecuperarPopup, setShowRecuperarPopup] = useState(false);
   const [showConfirmacionEnvioPopup, setShowConfirmacionEnvioPopup] = useState(false);
+  const email = userInfo.email;
+  
 
+  useEffect(() => {
+    const loadUserInfo = async () => {
+      try {
+        setLoading(true);
+        const userInfoArray = await fetchUserInfo();
+        const userInfo=userInfoArray[0];
+        setuserInfo(userInfo);
+        console.log('email:', email)
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          nombre: userInfo.nombre || '',
+          apellido: userInfo.apellido || '',
+          segundoapellido: userInfo.segundoapellido || '',
+          especialidad: userInfo.especialidad || '',
+          rutsupervisor: userInfo.rutsupervisor || '',
+        }));
+      }catch (err){
+        setError(err.message || 'No se pudo cargar la información del usuario');
+      }finally{
+        setLoading(false);
+      }
+    };
+    loadUserInfo();
+  },[])
+
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  }
   const handleLogout = () => {
     console.log('Cerrando sesión...');
+    logout();
     window.location.href = '/login';
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setShowConfirmacionEnvioPopup(true);  // Muestra el pop-up de confirmación de envío
   };
-
+  const handleSendEmail = async() => {
+    const responseMessage = await sendEmail(email);
+    if (responseMessage) {
+      console.log('Correo enviado exitosamente:', responseMessage)
+    }
+  }
   const handleConfirmEnvio = async () => {
     setLoading(true);
     try {
-      await axios.post('http://localhost:8000/forms/api/forms1/forms/', formData);
+      const dataToSubmit = {
+        ...formData,
+        fecha_inicio: formatDate(formData.fecha_inicio),
+        hora_inicio: formatTime(formData.hora_inicio),
+        fecha_fin: formatDate(formData.fecha_fin),
+        hora_fin: formatTime(formData.hora_fin),
+        estado: 'pendiente', // Campo requerido
+        rutsupervisor: formData.rutsupervisor || 'nulo', // Valor predeterminado
+      };
+      await axios.post('http://localhost:8000/forms/api/forms1/forms/', formData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      //Esto de abajo es lo que toma el campo de correo para la api, corri un ejemplo y me dejo enviar el formulario.
+      // Pero no envio el correo, intente un par de veces mas pero nada.
+      await handleSendEmail();
+      console.log('Enviando correo a:', email)
       setFormData({
         nombre: '',
         apellido: '',
@@ -55,7 +125,8 @@ const Formulario = () => {
         hora_fin: '',
         especialidad: '',
         unidad: '',
-        motivo: ''
+        motivo: '',
+        rutsupervisor: '',
       });
       setSuccessMessage('Formulario enviado exitosamente');
       setTimeout(() => setSuccessMessage(''), 3000);
@@ -65,7 +136,7 @@ const Formulario = () => {
 
     } catch (error) {
       console.error('Error enviando formulario:', error);
-      alert('Ocurrió un error al enviar el formulario.');
+      alert('Ocurrió un error al enviar el formulario.', error);
     } finally {
       setLoading(false);
     }
@@ -93,85 +164,170 @@ const Formulario = () => {
 
   return (
     <>
-      <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
+      {/* Botón para cerrar sesión */}
+      <button className="logout-button" onClick={handleLogout}>
+        Cerrar Sesión
+      </button>
+  
+      {/* Mensaje de éxito */}
       {successMessage && <div className="success-message">{successMessage}</div>}
-
+  
+      {/* Formulario principal */}
       <form onSubmit={handleSubmit}>
-        <img src={logoRedSalud} alt="Logo Red Salud" className="logo" />
-        
-        {/* Form Sections */}
-        <section className="form-section">
-          <h3>Información Personal</h3>
-          <div className="form-group">
-            <label>Nombre:</label>
-            <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label>Apellido:</label>
-            <input type="text" name="apellido" placeholder="Apellido" value={formData.apellido} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label>Segundo Apellido:</label>
-            <input type="text" name="segundoapellido" placeholder="Segundo Apellido" value={formData.segundoapellido} onChange={handleChange} />
-          </div>
-        </section>
-
-        <section className="form-section">
-          <h3>Fechas y Horarios</h3>
-          <div className="form-group">
-            <label>Fecha Inicio:</label>
-            <input type="date" name="fecha_inicio" value={formData.fecha_inicio} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label>Hora Inicio:</label>
-            <input type="time" name="hora_inicio" value={formData.hora_inicio} onChange={handleChange} />
-          </div>
-          <div className="form-group">
-            <label>Fecha Fin:</label>
-            <input type="date" name="fecha_fin" value={formData.fecha_fin} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label>Hora Fin:</label>
-            <input type="time" name="hora_fin" value={formData.hora_fin} onChange={handleChange} />
-          </div>
-        </section>
-
-        <section className="form-section">
-          <h3>Información de Servicio</h3>
-          <div className="form-group">
-            <label>Especialidad:</label>
-            <input type="text" name="especialidad" placeholder="Especialidad" value={formData.especialidad} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label>Unidad:</label>
-            <input type="text" name="unidad" placeholder="Unidad" value={formData.unidad} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label>Motivo:</label>
-            <input type="text" name="motivo" placeholder="Motivo" value={formData.motivo} onChange={handleChange} required />
-          </div>
-        </section>
-
-        <button type="submit" className="submit-button" disabled={loading}>
-          {loading ? 'Enviando...' : 'Enviar Formulario'}
-        </button>
+        {/* Mensaje de error */}
+        {error && <p className="error-message">{error}</p>}
+  
+        {/* Estado de carga */}
+        {loading ? (
+          <p>Cargando...</p>
+        ) : (
+          <>
+            {/* Logo */}
+            <img src={logoRedSalud} alt="Logo Red Salud" className="logo" />
+  
+            {/* Sección: Información Personal */}
+            <section className="form-section">
+              <h3>Información Personal</h3>
+              <div className="form-group">
+                <label>Nombre:</label>
+                <input
+                  type="text"
+                  name="nombre"
+                  placeholder="Nombre"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Apellido:</label>
+                <input
+                  type="text"
+                  name="apellido"
+                  placeholder="Apellido"
+                  value={formData.apellido}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Segundo Apellido:</label>
+                <input
+                  type="text"
+                  name="segundoapellido"
+                  placeholder="Segundo Apellido"
+                  value={formData.segundoapellido}
+                  onChange={handleChange}
+                />
+              </div>
+            </section>
+  
+            {/* Sección: Fechas y Horarios */}
+            <section className="form-section">
+              <h3>Fechas y Horarios</h3>
+              <div className="form-group">
+                <label>Fecha Inicio:</label>
+                <input
+                  type="date"
+                  name="fecha_inicio"
+                  value={formData.fecha_inicio}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Hora Inicio:</label>
+                <input
+                  type="time"
+                  name="hora_inicio"
+                  value={formData.hora_inicio}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Fecha Fin:</label>
+                <input
+                  type="date"
+                  name="fecha_fin"
+                  value={formData.fecha_fin}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Hora Fin:</label>
+                <input
+                  type="time"
+                  name="hora_fin"
+                  value={formData.hora_fin}
+                  onChange={handleChange}
+                />
+              </div>
+            </section>
+  
+            {/* Sección: Información de Servicio */}
+            <section className="form-section">
+              <h3>Información de Servicio</h3>
+              <div className="form-group">
+                <label>Especialidad:</label>
+                <input
+                  type="text"
+                  name="especialidad"
+                  placeholder="Especialidad"
+                  value={formData.especialidad}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Unidad:</label>
+                <input
+                  type="text"
+                  name="unidad"
+                  placeholder="Unidad"
+                  value={formData.unidad}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Motivo:</label>
+                <input
+                  type="text"
+                  name="motivo"
+                  placeholder="Motivo"
+                  value={formData.motivo}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </section>
+  
+            {/* Botón para enviar el formulario */}
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? 'Enviando...' : 'Enviar Formulario'}
+            </button>
+          </>
+        )}
       </form>
-
+  
       {/* Popup para recuperar hora médica */}
-      <RecuperarHoraPopup 
-        isOpen={showRecuperarPopup} 
-        onClose={handleRecuperarClose} 
-        onConfirm={handleRecuperarConfirm} 
+      <RecuperarHoraPopup
+        isOpen={showRecuperarPopup}
+        onClose={handleRecuperarClose}
+        onConfirm={handleRecuperarConfirm}
       />
-
+  
       {/* Popup de confirmación de envío */}
-      <ConfirmacionEnvioPopup 
-        isOpen={showConfirmacionEnvioPopup} 
-        onClose={handleCancelEnvio} 
-        onConfirm={handleConfirmEnvio} 
+      <ConfirmacionEnvioPopup
+        isOpen={showConfirmacionEnvioPopup}
+        onClose={handleCancelEnvio}
+        onConfirm={handleConfirmEnvio}
       />
     </>
   );
+  
+  
 };
 
 export default Formulario;

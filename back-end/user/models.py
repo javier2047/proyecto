@@ -20,8 +20,10 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     tipousuario = models.CharField(max_length=50, choices=TIPO_USUARIO_CHOICES)
     especialidad = models.CharField(max_length= 50)
     jefeacargo = models.CharField (max_length=50)
-    nombresupervisor = models.CharField (max_length=20,default='no tiene')
-    apellidosupervisor = models.CharField (max_length=20,default='no tiene')
+    nombresupervisor = models.CharField(max_length=20,default='no tiene')
+    apellidosupervisor = models.CharField(max_length=20,default='no tiene')
+    rutsupervisor = models.CharField(max_length=12, default='no tiene')
+    emailjefe = models.EmailField(max_length=35, default='')
 
     password = models.CharField(max_length = 128)
     is_active = models.BooleanField(default=True)
@@ -32,7 +34,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     
     objects = managesusuario()
     USERNAME_FIELD = 'rut'
-    REQUIRED_FIELDS = ['nombre','apellido','segundoapellido','email','tipousuario', 'especialidad','nombresupervisor','apellidosupervisor']
+    REQUIRED_FIELDS = ['nombre','apellido','segundoapellido','email','tipousuario', 'especialidad','nombresupervisor','apellidosupervisor','rutsupervisor', 'emailjefe']
     
     
     

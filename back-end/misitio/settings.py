@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'tasks',
     'forms',
     'user',
+    'email_service'
     
 
 ]
@@ -212,5 +213,17 @@ EMAIL_PORT = ("2525")
 EMAIL_HOST_USER = ("75fde047458c54")
 EMAIL_HOST_PASSWORD = ("80a5041e9eadfd")
 DEFAULT_FROM_EMAIL = "info@journal-bullet.com"
-DOMAIN = ("localhost:5173", "http://localhost:5174")
+DOMAIN = ("localhost:5173")
 SITE_NAME = "pedro sanches"
+
+#servicio de correos intento #2 
+# Deje un correo personal, hice un correo para esto. Aunque no me dejo hacer la cuestion para las aplicaciones
+#Asi que si pueden crear su propio correo para el ambiente bacan, puede ser que al ser lo mismo de arriba
+#provoque que no funcione, pero segun gpt no deberia.
+DEFAULT_FROM_EMAIL1 =  os.environ.get('email_user') #correo
+EMAIL_BACKEND1 = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST1 = 'smtp.gmail.com'
+EMAIL_PORT1 = 587
+EMAIL_USE_TLS1 = True
+EMAIL_HOST_USER1 = DEFAULT_FROM_EMAIL1
+EMAIL_HOST_PASSWORD1 = os.environ.get('email_password') #pass del correo

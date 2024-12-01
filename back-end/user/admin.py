@@ -12,10 +12,10 @@ class UsuariosAdmin(BaseUserAdmin):
     add_form = CustomisarCreacionFormulario
     form = CustomisarChageFormulario
     model = Usuarios
-    list_display = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor','is_active','is_staff']
+    list_display = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor','rutsupervisor', 'emailjefe','is_active','is_staff']
     list_display_links = ['rut']
-    list_filter = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor','is_active','is_staff']
-    search_fields = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor']
+    list_filter = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor','rutsupervisor','emailjefe','is_active','is_staff']
+    search_fields = ['rut','nombre','apellido','segundoapellido','email','tipousuario','especialidad','jefeacargo','nombresupervisor','apellidosupervisor','rutsupervisor', 'emailjefe']
 
     fieldsets = (
         (
@@ -26,7 +26,7 @@ class UsuariosAdmin(BaseUserAdmin):
         (
             _("Personal Information"),
             {
-                "fields": ('nombre', 'apellido','segundoapellido','email','tipousuario','especialidad','nombresupervisor','apellidosupervisor')
+                "fields": ('nombre', 'apellido','segundoapellido','email','tipousuario','especialidad','nombresupervisor','apellidosupervisor','rutsupervisor','emailjefe')
             },
         ),
         (

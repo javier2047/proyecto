@@ -45,8 +45,8 @@ const login = async (userData) => {
 
 // Logout 
 
-const logout = () => {
-    return localStorage.removeItem("user")
+export const logout = () => {
+    return localStorage.removeItem("token")
 }
 
 // Activate user
@@ -88,6 +88,10 @@ const resetPasswordConfirm = async (userData) => {
 
     const response = await axios.post(RESET_PASSWORD_CONFIRM_URL, userData, config)
 
+    if (response.status === 204) {
+        return { success: true, message: "Password reset successful" }; // Devuelve un objeto indicando el éxito
+      }
+      
     return response.data
 }
 

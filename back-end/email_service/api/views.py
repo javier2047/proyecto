@@ -1,8 +1,28 @@
+'''from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.core.mail import send_mail
+import os
+
+#Esta parte es la que hace la logica del correo, deberia funcionar.
+class email_Api_view(APIView):
+    def post(self, request):
+        try:
+            to_email = os.environ.get('email_user') 
+            subject = 'Confirmacion de formulario'
+            message = 'Su formulario fue enviado exitosamente\nEste mensaje fue enviado automaticamente, no responder'
+            send_mail(subject, message, None, [to_email])
+            return Response({'message':'Correo enviado exitosamente'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            error_message = str(e)
+            return Response({'message':error_message}, status=status.HTTP_400_BAD_REQUEST)'''
+#Sabado 30/11 nuevo intento
+#El path esta seteado ya, pero igual peguenle una mirada.
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
-from .models import Usuarios
+from ..models import models 
 
 class email_Api_view(APIView):
     def post(self, request):

@@ -33,7 +33,6 @@ front-end/node_modules
 
 # Cache cochino
 *__pycache__*
-
 __pycache__/
 
 .idea

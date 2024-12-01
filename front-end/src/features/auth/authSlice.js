@@ -84,45 +84,35 @@ export const resetPassword = createAsyncThunk(
 export const resetPasswordConfirm = createAsyncThunk(
     "auth/resetPasswordConfirm",
     async (userData, thunkAPI) => {
-        try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/v1/auth/users/reset_password_confirm/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        }
-      );
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Error al restablecer contraseña");
+      try {
+        const response = await authService.resetPasswordConfirm(userData);
+        return response;
+      } catch (error) {
+        const message =
+          (error.response && error.response.data && error.response.data.message) ||
+          error.message ||
+          "Unexpected error occurred";
+  
+        return thunkAPI.rejectWithValue(message);
       }
-
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
     }
-  }
-);
+  );
 
 export const getUserInfo = createAsyncThunk(
     "auth/getUserInfo",
     async (_, thunkAPI) => {
         try {
-            const accessToken = thunkAPI.getState().auth.user.access
-            return await authService.getUserInfo(accessToken)
+            const accessToken = thunkAPI.getState().auth.user.access; // Verifica si esta línea obtiene el token
+            return await authService.getUserInfo(accessToken);
         } catch (error) {
-            const message = (error.response && error.response.data
-                && error.response.data.message) ||
-                error.message || error.toString()
-
-            return thunkAPI.rejectWithValue(message)
+            const message =
+                (error.response && error.response.data?.message) ||
+                error.message ||
+                "Error desconocido al obtener información del usuario";
+            return thunkAPI.rejectWithValue(message);
         }
     }
-)
+);
 
 
 export const authSlice = createSlice({

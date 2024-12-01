@@ -14,13 +14,16 @@ import DashboardPage from '@routes/dashboard/Page';
 import UserFormRegister from '@components/formularioRegistro/formulario-registro';
 import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
-import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
 import RequestPasswordReset from '@components/enviarSolicitud/correo';
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 import ActivatePage from '@routes/ActivatePage';
 import AdminOpciones from '@components/Re-agenda/AdminOpciones';
+<<<<<<< HEAD
 import Home from '@components/Home/Home';
+=======
+import ResetPasswordPageConfirm from '@components/restablecerContraseña/confirmarContrasena';
+>>>>>>> 7f904e185c3c78a302b7cc85148baea80c2f4092
 // Definición de las rutas
 const router = createBrowserRouter([
   {
@@ -45,14 +48,14 @@ const router = createBrowserRouter([
   },
   {
     path: '/password/reset/confirm/:uid/:token',
-    element: <ResetPassword />, // Ruta para restablecer contraseña
+    element: <ResetPasswordPageConfirm />, // Ruta para restablecer contraseña
   },
   {
     path: '/form',
     element: <Formulario />, // Ruta para formulario
   },
   {
-    path: '/correo',
+    path: '/reset-password',
     element: <RequestPasswordReset />,
   },
   {
