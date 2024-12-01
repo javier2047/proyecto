@@ -112,7 +112,7 @@ const UserFormRegister = () => {
         <div className="form-title">Formulario de Registro</div>
 
         {/* Campos del formulario */}
-        {['rut', 'nombre', 'apellido', 'segundoapellido', 'email'].map((field) => (
+        {['rut', 'Nombre', 'Apellido', 'Segundo Apellido', 'Email'].map((field) => (
           <div className="form-group" key={field}>
             <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
             <input
@@ -145,7 +145,7 @@ const UserFormRegister = () => {
         </div>
 
         {/* Campos adicionales */}
-        {['especialidad', 'emailjefe', 'rutsupervisor','nombresupervisor', 'apellidosupervisor'].map((field) => (
+        {['Especialidad', 'Email de Jefe turno', 'Rut del Supervisor','Nombre del Supervisor', 'Apellido del Supervisor'].map((field) => (
           <div className="form-group" key={field}>
             <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
             <input
