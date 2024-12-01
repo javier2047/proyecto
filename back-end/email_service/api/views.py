@@ -22,6 +22,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
+from ..models import models 
 
 class email_Api_view(APIView):
     def post(self, request):

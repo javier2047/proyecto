@@ -7,6 +7,7 @@ import ConfirmacionEnvioPopup from './ConfirmacionEnvioPopup';
 import './formulario.css';
 import { fetchUserInfo } from '@services/getUserInfo';
 import { logout } from '@auth/authService';
+import { sendEmail } from '@services/sendEmailService';
 
 const formatDate = (date) => {
   const d = new Date(date);
@@ -31,12 +32,13 @@ const Formulario = () => {
     unidad: '',
     motivo: ''
   });
+  const [userInfo, setuserInfo] = useState([])
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [showRecuperarPopup, setShowRecuperarPopup] = useState(false);
   const [showConfirmacionEnvioPopup, setShowConfirmacionEnvioPopup] = useState(false);
-
+  const email = userInfo.email;
   
 
   useEffect(() => {
@@ -44,7 +46,9 @@ const Formulario = () => {
       try {
         setLoading(true);
         const userInfoArray = await fetchUserInfo();
-        const userInfo = userInfoArray[0];
+        const userInfo=userInfoArray[0];
+        setuserInfo(userInfo);
+        console.log('email:', email)
         setFormData((prevFormData) => ({
           ...prevFormData,
           nombre: userInfo.nombre || '',
@@ -86,7 +90,12 @@ const Formulario = () => {
 
     setShowConfirmacionEnvioPopup(true);  // Muestra el pop-up de confirmación de envío
   };
-
+  const handleSendEmail = async() => {
+    const responseMessage = await sendEmail(email);
+    if (responseMessage) {
+      console.log('Correo enviado exitosamente:', responseMessage)
+    }
+  }
   const handleConfirmEnvio = async () => {
     setLoading(true);
     try {
@@ -104,9 +113,8 @@ const Formulario = () => {
       });
       //Esto de abajo es lo que toma el campo de correo para la api, corri un ejemplo y me dejo enviar el formulario.
       // Pero no envio el correo, intente un par de veces mas pero nada.
-      await axios.post('http://localhost:8000/forms/api/email/', { email: formData.email }, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      await handleSendEmail();
+      console.log('Enviando correo a:', email)
       setFormData({
         nombre: '',
         apellido: '',
@@ -128,7 +136,7 @@ const Formulario = () => {
 
     } catch (error) {
       console.error('Error enviando formulario:', error);
-      alert('Ocurrió un error al enviar el formulario.');
+      alert('Ocurrió un error al enviar el formulario.', error);
     } finally {
       setLoading(false);
     }
@@ -213,21 +221,6 @@ const Formulario = () => {
                 />
               </div>
             </section>
-              <section className="form-section">
-                <h3>Contacto</h3>
-                <div className="form-group">
-                  <label>Email:</label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Ingrese su correo electrónico"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </section>
-
   
             {/* Sección: Fechas y Horarios */}
             <section className="form-section">
