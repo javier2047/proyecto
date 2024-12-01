@@ -20,6 +20,11 @@ import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 import ActivatePage from '@routes/ActivatePage';
 import AdminOpciones from '@components/Re-agenda/AdminOpciones';
 import ResetPasswordPageConfirm from '@components/restablecerContraseña/confirmarContrasena';
+<<<<<<< HEAD
+=======
+import Home from '@components/Home/Home';
+
+>>>>>>> 92406e472b67e58403a790b8a72dcf78a53dbbb8
 // Definición de las rutas
 const router = createBrowserRouter([
   {
@@ -66,6 +71,14 @@ const router = createBrowserRouter([
     path: '/adminOpciones',
     element: <AdminOpciones/>, // Ruta para activar la cuenta
   },
+<<<<<<< HEAD
+=======
+  {
+    path: '/Home',
+    element: <Home/>, // Ruta para activar la cuenta
+  },
+  
+>>>>>>> 92406e472b67e58403a790b8a72dcf78a53dbbb8
 ]);
 
 
