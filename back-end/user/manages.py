@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.utils.translation import gettext_lazy as _
 
-#usuario normal
+#usuario normal y datos necesarios para su creacion
 class managesusuario(BaseUserManager):
 
     def create_user(self, rut, nombre,apellido, segundoapellido,email,tipousuario,password,especialidad,nombresupervisor,apellidosupervisor, rutsupervisor, emailjefe,**extra_fiels):

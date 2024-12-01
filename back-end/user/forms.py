@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from .models import Usuarios
 
+
+#metodo  para crear usuarios
 class CustomisarCreacionFormulario(UserCreationForm):
     class Meta(UserCreationForm):
         model = Usuarios
