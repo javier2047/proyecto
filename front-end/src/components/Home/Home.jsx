@@ -1,8 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import "./styles.css";
 import logo from "./logo-red-salud.png";
 
 function Home() {
+  const navigate = useNavigate(); // Inicializa useNavigate
+
+  // Función para manejar el clic del botón
+  const handleNavigate = () => {
+    navigate("/login"); // Redirige a la página de login
+  };
+
   return (
     <div className="home-container">
       <header className="header">
@@ -21,7 +29,10 @@ function Home() {
         <section className="hero">
           <h1>Bienvenidos a RedSalud</h1>
           <p>Comprometidos con tu salud y bienestar.</p>
-          <button className="cta-button">Ingresar/Registrarse</button> {/* Cambié el texto aquí */}
+          {/* Botón con funcionalidad de navegación */}
+          <button className="cta-button" onClick={handleNavigate}>
+            Ingresar/Registrarse
+          </button>
         </section>
         <section id="services" className="section">
           <h2>Nuestros Servicios</h2>
@@ -36,10 +47,10 @@ function Home() {
           <p>Estamos aquí para ayudarte con lo que necesites.</p>
         </section>
       </main>
-  <footer className="footer">
-    <p>&copy; 2024 RedSalud. Todos los derechos reservados.</p>
-    </footer>
-  </div>
+      <footer className="footer">
+        <p>&copy; 2024 RedSalud. Todos los derechos reservados.</p>
+      </footer>
+    </div>
   );
 }
 
