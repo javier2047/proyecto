@@ -1,0 +1,207 @@
+/* Variables de color */
+:root {
+    --main-color:  #02807F; /* Verde RedSalud */
+    --secondary-color: #ffffff; /* Blanco */
+    --accent-color: #000000; /* Negro */
+    --background-color: #f4f4f4; /* Gris claro */
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Esto asegura que el cuerpo tenga la altura completa de la ventana */
+    width: 100vw; /* Esto asegura que el cuerpo ocupe todo el ancho */
+    box-sizing: border-box;
+  }
+  
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgba(250, 250, 250, 0.082);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 1rem 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 60px;
+
+  }
+  
+  .nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav li {
+    margin-left: 1.5rem;
+  }
+  
+  .nav a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .main {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 80px; /* Espacio para la barra de navegación fija */
+  }
+  
+  .hero {
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .hero h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    text-align: center; /* Centrado de texto */
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    text-align: center; /* Centrado de texto */
+  }
+  
+  .cta-button {
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  .cta-button:hover {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+  }
+  
+  .section {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section h2 {
+    margin-top: 0;
+    font-size: 1.8rem;
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 1rem 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0; /* Poner el footer en la parte inferior */
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra en la parte superior */
+  }
+  
+  
+  /* Media Queries para Responsividad */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem;
+    }
+
+    .nav ul {
+      flex-direction: column;
+      margin-top: 1rem;
+    }
+  
+    .nav li {
+      margin-left: 0;
+      margin-top: 1rem;
+    }
+  
+    .cta-button {
+      width: 100%;
+      padding: 1rem 0;
+      font-size: 1.2rem;
+    }
+  
+    .hero {
+      height: 250px;
+      padding: 1.5rem;
+    }
+  
+    .hero h1 {
+      font-size: 2rem;
+    }
+  
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero {
+      height: 200px;
+    }
+  
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+  
+    .hero p {
+      font-size: 0.9rem;
+    }
+  }
+  

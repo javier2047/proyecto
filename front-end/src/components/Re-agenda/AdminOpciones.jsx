@@ -1,6 +1,7 @@
 import Layout from "@components/dashboard/layout/Layout";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './adminOpciones.css';
 
 function AdminOpciones() {
   const [data, setData] = useState([]);
@@ -42,49 +43,47 @@ function AdminOpciones() {
 
   return (
     <Layout>
-      <div className="container">
+      <div className="form-container">
         <div className="py-4">
           <h2 className="text-center mb-4 mt-4">Listado de Tareas</h2>
-          <div
-            className="table-responsive"
-            style={{
-              maxHeight: "800px",
-              overflowY: "scroll",
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
-          >
-            <style>
-              {`
-                .table-responsive::-webkit-scrollbar {
-                  display: none;
-                }
-              `}
-            </style>
-            <table className="table table-bordered">
-              <thead className="thead-light">
-                <tr>
-                  <th>Nombre</th>
-                  <th>Rango de Fecha</th>
-                  <th>Fecha Desde</th>
-                  <th>Fecha Hasta</th>
-
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((row, index) => (
-                  <tr key={index}>
-                    <td>{row.nombre}</td>
-                    <td>{row.rangoDeFecha}</td>
-                    <td>{row.fechaDesde || "No especificada"}</td>
-                    <td>{row.fechaHasta || "No especificada"}</td>
-
-
-
+          <div className="custom-container">
+            <div
+              className="table-responsive"
+              style={{
+                maxHeight: "800px",
+                overflowY: "scroll",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+            >
+              <style>
+                {`
+                  .table-responsive::-webkit-scrollbar {
+                    display: none;
+                  }
+                `}
+              </style>
+              <table className="table table-bordered">
+                <thead className="thead-light">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Rango de Fecha</th>
+                    <th>Fecha Desde</th>
+                    <th>Fecha Hasta</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {data.map((row, index) => (
+                    <tr key={index}>
+                      <td>{row.nombre}</td>
+                      <td>{row.rangoDeFecha}</td>
+                      <td>{row.fechaDesde || "No especificada"}</td>
+                      <td>{row.fechaHasta || "No especificada"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

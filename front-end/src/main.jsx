@@ -20,11 +20,12 @@ import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 import ActivatePage from '@routes/ActivatePage';
 import AdminOpciones from '@components/Re-agenda/AdminOpciones';
 import ResetPasswordPageConfirm from '@components/restablecerContraseña/confirmarContrasena';
+import Home from '@components/Home/Home';
 // Definición de las rutas
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // Página principal
+    element: <Home />, // Página principal
   },
   {
     path: '/login',
