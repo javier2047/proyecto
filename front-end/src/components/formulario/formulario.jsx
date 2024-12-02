@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';  // Importa useNavigate
-import logoRedSalud from './logo_red_salud_497cf0b50b.png';
+
 import logoRedSalud2 from './logo-redsalud.svg';
 import RecuperarHoraPopup from './RecuperarHoraPopup';
 import ConfirmacionEnvioPopup from './ConfirmacionEnvioPopup';
