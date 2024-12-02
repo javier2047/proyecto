@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from email_service.api.views import email_Api_view
-
+from email_service.api.views import emailJefe_Api_view
 
 
 
@@ -32,5 +32,7 @@ urlpatterns = [
     #El de abajo, fue para el primer intento.
     #path('send-email', email_Api_view.as_view(), name='send-email') 
     #Este es el que estaba usando ahora al ultimo.
-     path('forms/api/email/', email_Api_view.as_view(), name='email-api')
+    path('forms/api/email/', email_Api_view.as_view(), name='email-api'),
+    path('forms/api/emailjefe/', emailJefe_Api_view.as_view(), name='emailjefe-api') #Api para el correo del jefe
+
 ]

@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';  // Importa useNavigate
 import logoRedSalud from './logo_red_salud_497cf0b50b.png';
+import logoRedSalud2 from './logo-redsalud.svg';
 import RecuperarHoraPopup from './RecuperarHoraPopup';
 import ConfirmacionEnvioPopup from './ConfirmacionEnvioPopup';
 import './formulario.css';
 import { fetchUserInfo } from '@services/getUserInfo';
 import { logout } from '@auth/authService';
 import { sendEmail } from '@services/sendEmailService';
+import { sendEmailJefe } from '@services/sendEmailJefe';
 
 const formatDate = (date) => {
   const d = new Date(date);
@@ -39,14 +41,15 @@ const Formulario = () => {
   const [showRecuperarPopup, setShowRecuperarPopup] = useState(false);
   const [showConfirmacionEnvioPopup, setShowConfirmacionEnvioPopup] = useState(false);
   const email = userInfo.email;
-  
+  const emailjefe = userInfo.emailjefe; // esto es para el correo del jefe
+
 
   useEffect(() => {
     const loadUserInfo = async () => {
       try {
         setLoading(true);
         const userInfoArray = await fetchUserInfo();
-        const userInfo=userInfoArray[0];
+        const userInfo = userInfoArray[0];
         setuserInfo(userInfo);
         console.log('email:', email)
         setFormData((prevFormData) => ({
@@ -57,16 +60,16 @@ const Formulario = () => {
           especialidad: userInfo.especialidad || '',
           rutsupervisor: userInfo.rutsupervisor || '',
         }));
-      }catch (err){
+      } catch (err) {
         setError(err.message || 'No se pudo cargar la información del usuario');
-      }finally{
+      } finally {
         setLoading(false);
       }
     };
     loadUserInfo();
-  },[])
+  }, [])
 
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -90,10 +93,16 @@ const Formulario = () => {
 
     setShowConfirmacionEnvioPopup(true);  // Muestra el pop-up de confirmación de envío
   };
-  const handleSendEmail = async() => {
+  const handleSendEmail = async () => {
     const responseMessage = await sendEmail(email);
     if (responseMessage) {
       console.log('Correo enviado exitosamente:', responseMessage)
+    }
+  };
+  const handleSendEmailJefe = async() => {  // 1 de DICIEMBRE
+    const responseMessage = await sendEmailJefe(emailjefe);
+    if(responseMessage){
+      console.log('Correo enviado al jefe exitosamente', responseMessage)
     }
   }
   const handleConfirmEnvio = async () => {
@@ -114,7 +123,8 @@ const Formulario = () => {
       //Esto de abajo es lo que toma el campo de correo para la api, corri un ejemplo y me dejo enviar el formulario.
       // Pero no envio el correo, intente un par de veces mas pero nada.
       await handleSendEmail();
-      console.log('Enviando correo a:', email)
+      await handleSendEmailJefe();
+      console.log('Enviando correo a:', email, emailjefe)
       setFormData({
         nombre: '',
         apellido: '',
@@ -130,7 +140,7 @@ const Formulario = () => {
       });
       setSuccessMessage('Formulario enviado exitosamente');
       setTimeout(() => setSuccessMessage(''), 3000);
-      
+
       // Muestra el popup para recuperar la hora médica después de enviar el formulario
       setShowRecuperarPopup(true);
 
@@ -168,166 +178,166 @@ const Formulario = () => {
       <button className="logout-button" onClick={handleLogout}>
         Cerrar Sesión
       </button>
-  
+
       {/* Mensaje de éxito */}
       {successMessage && <div className="success-message">{successMessage}</div>}
-  
+
       {/* Formulario principal */}
-      <form onSubmit={handleSubmit}>
-        {/* Mensaje de error */}
-        {error && <p className="error-message">{error}</p>}
-  
-        {/* Estado de carga */}
-        {loading ? (
-          <p>Cargando...</p>
-        ) : (
-          <>
-            {/* Logo */}
-            <img src={logoRedSalud} alt="Logo Red Salud" className="logo" />
-  
-            {/* Sección: Información Personal */}
-            <section className="form-section">
-              <h3>Información Personal</h3>
-              <div className="form-group">
-                <label>Nombre:</label>
-                <input
-                  type="text"
-                  name="nombre"
-                  placeholder="Nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Apellido:</label>
-                <input
-                  type="text"
-                  name="apellido"
-                  placeholder="Apellido"
-                  value={formData.apellido}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Segundo Apellido:</label>
-                <input
-                  type="text"
-                  name="segundoapellido"
-                  placeholder="Segundo Apellido"
-                  value={formData.segundoapellido}
-                  onChange={handleChange}
-                />
-              </div>
-            </section>
-  
-            {/* Sección: Fechas y Horarios */}
-            <section className="form-section">
-              <h3>Fechas y Horarios</h3>
-              <div className="form-group">
-                <label>Fecha Inicio:</label>
-                <input
-                  type="date"
-                  name="fecha_inicio"
-                  value={formData.fecha_inicio}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Hora Inicio:</label>
-                <input
-                  type="time"
-                  name="hora_inicio"
-                  value={formData.hora_inicio}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Fecha Fin:</label>
-                <input
-                  type="date"
-                  name="fecha_fin"
-                  value={formData.fecha_fin}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Hora Fin:</label>
-                <input
-                  type="time"
-                  name="hora_fin"
-                  value={formData.hora_fin}
-                  onChange={handleChange}
-                />
-              </div>
-            </section>
-  
-            {/* Sección: Información de Servicio */}
-            <section className="form-section">
-              <h3>Información de Servicio</h3>
-              <div className="form-group">
-                <label>Especialidad:</label>
-                <input
-                  type="text"
-                  name="especialidad"
-                  placeholder="Especialidad"
-                  value={formData.especialidad}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Unidad:</label>
-                <input
-                  type="text"
-                  name="unidad"
-                  placeholder="Unidad"
-                  value={formData.unidad}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Motivo:</label>
-                <input
-                  type="text"
-                  name="motivo"
-                  placeholder="Motivo"
-                  value={formData.motivo}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </section>
-  
-            {/* Botón para enviar el formulario */}
-            <button type="submit" className="submit-button" disabled={loading}>
-              {loading ? 'Enviando...' : 'Enviar Formulario'}
-            </button>
-          </>
-        )}
-      </form>
-  
-      {/* Popup para recuperar hora médica */}
-      <RecuperarHoraPopup
-        isOpen={showRecuperarPopup}
-        onClose={handleRecuperarClose}
-        onConfirm={handleRecuperarConfirm}
-      />
-  
-      {/* Popup de confirmación de envío */}
-      <ConfirmacionEnvioPopup
-        isOpen={showConfirmacionEnvioPopup}
-        onClose={handleCancelEnvio}
-        onConfirm={handleConfirmEnvio}
-      />
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          {/* Estado de carga */}
+          {loading ? (
+            <p>Cargando...</p>
+          ) : (
+            <>
+              {/*Logo Redsalud SVG*/}
+              <img src={logoRedSalud2} alt="Logo Red Salud" className="logo" />
+
+              {/* Mensaje de error */}
+              {error && <p className="error-message">{error}</p>}
+
+              {/* Sección: Información Personal */}
+              <section className="form-section">
+                <h3>Información Personal</h3>
+                <div className="form-group">
+                  <label>Nombre:</label>
+                  <input
+                    type="text"
+                    name="nombre"
+                    placeholder="Nombre"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Apellido:</label>
+                  <input
+                    type="text"
+                    name="apellido"
+                    placeholder="Apellido"
+                    value={formData.apellido}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Segundo Apellido:</label>
+                  <input
+                    type="text"
+                    name="segundoapellido"
+                    placeholder="Segundo Apellido"
+                    value={formData.segundoapellido}
+                    onChange={handleChange}
+                  />
+                </div>
+              </section>
+
+              {/* Sección: Fechas y Horarios */}
+              <section className="form-section">
+                <h3>Fechas y Horarios</h3>
+                <div className="form-group">
+                  <label>Fecha Inicio:</label>
+                  <input
+                    type="date"
+                    name="fecha_inicio"
+                    value={formData.fecha_inicio}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Hora Inicio:</label>
+                  <input
+                    type="time"
+                    name="hora_inicio"
+                    value={formData.hora_inicio}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Fecha Fin:</label>
+                  <input
+                    type="date"
+                    name="fecha_fin"
+                    value={formData.fecha_fin}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Hora Fin:</label>
+                  <input
+                    type="time"
+                    name="hora_fin"
+                    value={formData.hora_fin}
+                    onChange={handleChange}
+                  />
+                </div>
+              </section>
+
+              {/* Sección: Información de Servicio */}
+              <section className="form-section">
+                <h3>Información de Servicio</h3>
+                <div className="form-group">
+                  <label>Especialidad:</label>
+                  <input
+                    type="text"
+                    name="especialidad"
+                    placeholder="Especialidad"
+                    value={formData.especialidad}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Unidad:</label>
+                  <input
+                    type="text"
+                    name="unidad"
+                    placeholder="Unidad"
+                    value={formData.unidad}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Motivo:</label>
+                  <input
+                    type="text"
+                    name="motivo"
+                    placeholder="Motivo"
+                    value={formData.motivo}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </section>
+              {/* Popup para recuperar hora médica */}
+              <RecuperarHoraPopup
+                isOpen={showRecuperarPopup}
+                onClose={handleRecuperarClose}
+                onConfirm={handleRecuperarConfirm}
+              />
+
+              {/* Popup de confirmación de envío */}
+              <ConfirmacionEnvioPopup
+                isOpen={showConfirmacionEnvioPopup}
+                onClose={handleCancelEnvio}
+                onConfirm={handleConfirmEnvio}
+              />
+              {/* Botón para enviar el formulario */}
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? 'Enviando...' : 'Enviar Formulario'}
+              </button>
+            </>
+          )}
+        </form>
+      </div>
     </>
   );
-  
-  
+
+
 };
 
 export default Formulario;
