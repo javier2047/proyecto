@@ -45,6 +45,7 @@ const Formulario = () => {
         setLoading(true);
         const userInfoArray = await fetchUserInfo();
         const userInfo = userInfoArray[0];
+        console.log(userInfo);
         setFormData((prevFormData) => ({
           ...prevFormData,
           nombre: userInfo.nombre || '',
