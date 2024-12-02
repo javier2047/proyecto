@@ -149,7 +149,7 @@ function Cancelaciones() {
         <div style={{ marginBottom: "20px" }}>
           {/* Selección del primer campo para filtrar */}
           <label>
-            Filtro 1:
+          Filtrar por:
             <select
               name="filterField1"
               value={filterField1}
@@ -164,7 +164,7 @@ function Cancelaciones() {
 
           {/* Selección del valor para el primer filtro */}
           <label style={{ marginLeft: "20px" }}>
-            Valor (1):
+          Filtrar por: 
             <select
               name="filterValue1"
               value={filterValue1}
@@ -185,7 +185,7 @@ function Cancelaciones() {
         <div style={{ marginBottom: "20px" }}>
           {/* Selección del segundo campo para filtrar */}
           <label>
-            Filtro 2:
+            Filtrar por: 
             <select
               name="filterField2"
               value={filterField2}
@@ -200,7 +200,7 @@ function Cancelaciones() {
 
           {/* Selección del valor para el segundo filtro */}
           <label style={{ marginLeft: "20px" }}>
-            Valor (2):
+          Filtrar por:
             <select
               name="filterValue2"
               value={filterValue2}
@@ -221,7 +221,7 @@ function Cancelaciones() {
         {/* Gráfico de barras */}
         {!isLoading && (
           <div>
-            <Bar data={chartData} options={options} height={500} />
+            <Bar data={chartData} options={options} height={700} />
           </div>
         )}
       </div>

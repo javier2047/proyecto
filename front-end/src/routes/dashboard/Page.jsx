@@ -85,7 +85,7 @@ export default function DashboardPage() {
                 <div className='col-12 mb-3 mb-lg-0 col-lg-4'>
                     <div className='card'>
                         <div className='card-body'>
-                            <p>Cancelaciones Último Mes</p>
+                            <p>Cancelaciones del Último Mes</p>
                             <h3>{lastMonthCanc}</h3>
                         </div>
                     </div>

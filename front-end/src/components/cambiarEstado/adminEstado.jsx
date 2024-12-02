@@ -1,6 +1,8 @@
 import Layout from "@components/dashboard/layout/Layout";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './adminEstado.css';
+
 
 function AdminEstado() {
   const [activeMenu, setActiveMenu] = useState(null);

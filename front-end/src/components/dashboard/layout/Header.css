@@ -27,3 +27,20 @@
     cursor: pointer;
     color: #012970
 }
+
+.parent {
+    position: relative;
+    height: 500px; 
+    background: #f0f0f0;
+}
+
+.my-5 {
+    color: #333;
+    text-align: center;
+    position: relative;
+    background: #fff;
+    border-radius: 15px;
+    padding: 50px;
+    top: 40px;
+    margin-top: 10px; 
+}

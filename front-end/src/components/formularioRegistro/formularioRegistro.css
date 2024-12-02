@@ -1,17 +1,11 @@
 /* Contenedor principal del formulario */
 .form-container {
-  width: 200%;
-  margin: 0 auto;
-  padding: 20px;
-  margin-top: 180px;
-  margin-block: 180px;
-  padding-left: 30px;
-  padding-right: 30px;
+  top: 500px;
   background: linear-gradient(135deg, rgba(255,255,255, 0,1), rgba(255,255,255,9));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  background-color: #cecece57;
-  position:absolute; /* Fija el contenedor en la pantalla */
+  background-color: #cececef6;
+  position: relative; /* Fija el contenedor en la pantalla */
   transform: translate(-50%, -50%); /* Ajusta el punto de referencia para centrar */
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 0 32px rgba(0, 0, 0, 0.37);
@@ -33,9 +27,8 @@
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  
+  color: #fff;  
 }
-
 
 
 /* Sección del formulario */
@@ -48,7 +41,7 @@
 /* Encabezado de cada sección */
 .form-section h3 {
   font-size: 18px;
-  color: #497cf0;
+  color: #8a8f9b1c;
   margin-bottom: 10px;
 }
 
