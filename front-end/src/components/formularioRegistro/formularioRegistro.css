@@ -3,18 +3,22 @@
   width: 200%;
   margin: 0 auto;
   padding: 20px;
-  margin-top: 100px;
+  margin-top: 180px;
+  margin-block: 180px;
   padding-left: 30px;
   padding-right: 30px;
   background: linear-gradient(135deg, rgba(255,255,255, 0,1), rgba(255,255,255,9));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   background-color: #cecece57;
+  position:absolute; /* Fija el contenedor en la pantalla */
+  transform: translate(-50%, -50%); /* Ajusta el punto de referencia para centrar */
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  font-family: Arial, sans-serif;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.37);
+  border-radius: 30px;
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaÃ±o total */
 }
+
 
 /* Logo centrado */
 .logo {
@@ -28,9 +32,11 @@
 .form-title {
   text-align: center;
   font-size: 24px;
-  color: #fff;
   margin-bottom: 20px;
+  
 }
+
+
 
 /* Sección del formulario */
 .form-section {

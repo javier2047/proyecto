@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser,  PermissionsMixin
 
 from django.utils.translation import gettext as _
 from .manages import managesusuario
-
+#modelo pricipal para la tabla usuarios
 # Create your models here.
 class Usuarios(AbstractBaseUser, PermissionsMixin):
     rut = models.CharField(max_length=12,unique= True)
@@ -31,7 +31,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)  # Permiso de superusuario
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    
+    #carateres necesarios para creacion de usuario rut como principal y datos requeridos son los demas
     objects = managesusuario()
     USERNAME_FIELD = 'rut'
     REQUIRED_FIELDS = ['nombre','apellido','segundoapellido','email','tipousuario', 'especialidad','nombresupervisor','apellidosupervisor','rutsupervisor', 'emailjefe']

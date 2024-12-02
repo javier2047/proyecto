@@ -8,7 +8,7 @@ from tasks import views
 #from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 
-#
+#api creada para hacer pruebas, ahora es una api funcional del programa
 routers =routers.DefaultRouter()
 routers.register(r'tasks',views.tasksvista,'tasks')
 
