@@ -175,7 +175,7 @@ REST_FRAMEWORK = {
     ],
 
 }
-
+#creacion de token y veridficacion con la mima para realizar authorizaciones
 SIMPLE_JWT ={
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
@@ -186,7 +186,7 @@ SIMPLE_JWT ={
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "AUTH_TOKEN_CLASSES":("rest_framework_simplejwt.tokens.AccessToken",),
 }
-
+#metodo de verificacion
 DJOSER = {
     'LOGIN_FIELD': 'rut',
     "USER_CREATE_PASSWORD_RETYPE": True,
@@ -205,7 +205,7 @@ DJOSER = {
         'user_delete': "djoser.serializers.UserDeleteSerializer",      
     }
 }
-
+#servicio de prueba de correo mail de prueba de mailtrap parra realizar pruebas de manera local
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = ("sandbox.smtp.mailtrap.io")
 EMAIL_USE_TLS = True

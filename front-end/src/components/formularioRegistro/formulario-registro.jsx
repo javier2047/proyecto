@@ -12,7 +12,8 @@ const UserFormRegister = () => {
     email: '',
     tipousuario: '',
     especialidad: '',
-    rutsupervisor: '', 
+    rutsupervisor: '',
+    emailjefe: '', 
     nombresupervisor: '',
     apellidosupervisor: '',
     password: '',
@@ -36,7 +37,8 @@ const UserFormRegister = () => {
         key !== 'especialidad' && 
         key !== 'nombresupervisor' && 
         key !== 'apellidosupervisor' &&
-      key!== 'rutsupervisor') {
+        key!== 'rutsupervisor' && 
+        key!== 'emailjefe') {
         newErrors[key] = 'Este campo es obligatorio';
       }
     });
@@ -82,6 +84,7 @@ const UserFormRegister = () => {
           especialidad: '',
           jefeacargo:'',
           rutsupervisor: '',
+          emailjefe: '',
           nombresupervisor: '',
           apellidosupervisor: '',
           password: '',
@@ -109,7 +112,7 @@ const UserFormRegister = () => {
         <div className="form-title">Formulario de Registro</div>
 
         {/* Campos del formulario */}
-        {['rut', 'nombre', 'apellido', 'segundoapellido', 'email'].map((field) => (
+        {['rut', 'Nombre', 'Apellido', 'Segundo Apellido', 'Email'].map((field) => (
           <div className="form-group" key={field}>
             <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
             <input
@@ -142,7 +145,7 @@ const UserFormRegister = () => {
         </div>
 
         {/* Campos adicionales */}
-        {['especialidad', 'rutsupervisor','nombresupervisor', 'apellidosupervisor'].map((field) => (
+        {['Especialidad', 'Email de Jefe turno', 'Rut del Supervisor','Nombre del Supervisor', 'Apellido del Supervisor'].map((field) => (
           <div className="form-group" key={field}>
             <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
             <input

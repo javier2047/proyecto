@@ -60,7 +60,8 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className='wrapper'>
+    <div className='login-page'>
+    <div className='login-wrapper'>
       <form onSubmit={handleSubmit}>
         <img
           src="https://b2597467.smushcdn.com/2597467/wp-content/uploads/logo-redsalud-dental-blanco.png?lossy=1&strip=1&webp=1"
@@ -97,6 +98,7 @@ export const LoginForm = () => {
         
         <button type="submit">Ingresar</button>
       </form>
+    </div>
     </div>
   );
 };

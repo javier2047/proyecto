@@ -66,6 +66,7 @@ const router = createBrowserRouter([
     path: '/adminOpciones',
     element: <AdminOpciones/>, // Ruta para activar la cuenta
   },
+
 ]);
 
 
