@@ -99,7 +99,7 @@
 /* Dispositivos con ancho menor a 768px (tabletas y móviles grandes) */
 @media (max-width: 768px) {
   .form-container {
-    width: 90%;
+    top: 800px;
   }
 
   .form-group {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate
-import "./styles.css";
+import "./HomeEstilo.css";
 import logo from "./logo-red-salud.png";
 
 function Home() {
