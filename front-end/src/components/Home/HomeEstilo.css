@@ -25,7 +25,7 @@
     background: linear-gradient(360deg, rgba(255,255,255, 0.1), rgba(255,255,255,0.9));
   }
   
-  .header {
+  .home-container .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
