@@ -24,6 +24,9 @@ const ActivatePage = () => {
     }
 
     useEffect(() => {
+        console.log('isSuccess:', isSuccess);
+        console.log('isError:', isError);
+        console.log('message:', message);
         if (isError) {
             toast.error(message) // Muestra mensaje de error
         }

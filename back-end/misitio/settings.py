@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'tasks',
     'forms',
     'user',
+    'email_service'
     
 
 ]
@@ -174,7 +175,7 @@ REST_FRAMEWORK = {
     ],
 
 }
-
+#creacion de token y veridficacion con la mima para realizar authorizaciones
 SIMPLE_JWT ={
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
@@ -185,7 +186,7 @@ SIMPLE_JWT ={
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "AUTH_TOKEN_CLASSES":("rest_framework_simplejwt.tokens.AccessToken",),
 }
-
+#metodo de verificacion
 DJOSER = {
     'LOGIN_FIELD': 'rut',
     "USER_CREATE_PASSWORD_RETYPE": True,
@@ -204,7 +205,7 @@ DJOSER = {
         'user_delete': "djoser.serializers.UserDeleteSerializer",      
     }
 }
-
+#servicio de prueba de correo mail de prueba de mailtrap parra realizar pruebas de manera local
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = ("sandbox.smtp.mailtrap.io")
 EMAIL_USE_TLS = True
@@ -214,3 +215,15 @@ EMAIL_HOST_PASSWORD = ("80a5041e9eadfd")
 DEFAULT_FROM_EMAIL = "info@journal-bullet.com"
 DOMAIN = ("localhost:5173")
 SITE_NAME = "pedro sanches"
+
+#servicio de correos intento #2 
+# Deje un correo personal, hice un correo para esto. Aunque no me dejo hacer la cuestion para las aplicaciones
+#Asi que si pueden crear su propio correo para el ambiente bacan, puede ser que al ser lo mismo de arriba
+#provoque que no funcione, pero segun gpt no deberia.
+DEFAULT_FROM_EMAIL1 =  os.environ.get('email_user') #correo
+EMAIL_BACKEND1 = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST1 = 'smtp.gmail.com'
+EMAIL_PORT1 = 587
+EMAIL_USE_TLS1 = True
+EMAIL_HOST_USER1 = DEFAULT_FROM_EMAIL1
+EMAIL_HOST_PASSWORD1 = os.environ.get('email_password') #pass del correo

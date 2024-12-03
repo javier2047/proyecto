@@ -2,21 +2,34 @@ import Cancelaciones from '@routes/dashboard/Cancelaciones';
 import Layout from '@components/dashboard/layout/Layout';
 import { getCancelaciones } from '../../services/apiServiceDashboard'
 import { useEffect, useState } from 'react';
+import { fetchUserInfo } from '@services/getUserInfo';
 export default function DashboardPage() {
     const [totalCancelaciones, setTotalCancelaciones] = useState(0);
     const [highestCancelator, setHighestCancelator] = useState("");
     const [lastMonthCanc, setLastMonthCanc] = useState (0)
+    const [rutSupervisor, setRutSupervisor] = useState('');
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getCancelaciones();
-                setTotalCancelaciones(data.length);
 
+                const userInfoArray = await fetchUserInfo();
+                const userInfo = userInfoArray[0]
+                setRutSupervisor(userInfo.rut);
+
+
+                const data = await getCancelaciones();
+               
+                
+                const cancelacionesSubordinados = data.filter(
+                    (item) => item.rutsupervisor === rutSupervisor  // filtrar cancelaciones de subordinados
+                )
+                setTotalCancelaciones(cancelacionesSubordinados.length);
                 //Filtrar por ultimo mes
                 const currentDate = new Date();
                 const lastMonth = new Date(currentDate.setMonth(currentDate.getMonth() - 1))
 
-                const cancelationsLastMonth = data.filter((item) =>{
+                const cancelationsLastMonth = cancelacionesSubordinados.filter((item) =>{
                     const initialDate = new Date(item.fecha_inicio);
                     return initialDate >= lastMonth
                 });
@@ -45,7 +58,7 @@ export default function DashboardPage() {
         };
 
         fetchData();
-    }, []);
+    }, [rutSupervisor]);
     return (
         <Layout>
             <div className='my-5'>
@@ -72,7 +85,7 @@ export default function DashboardPage() {
                 <div className='col-12 mb-3 mb-lg-0 col-lg-4'>
                     <div className='card'>
                         <div className='card-body'>
-                            <p>Cancelaciones Último Mes</p>
+                            <p>Cancelaciones del Último Mes</p>
                             <h3>{lastMonthCanc}</h3>
                         </div>
                     </div>

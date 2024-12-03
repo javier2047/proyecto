@@ -14,17 +14,18 @@ import DashboardPage from '@routes/dashboard/Page';
 import UserFormRegister from '@components/formularioRegistro/formulario-registro';
 import { LoginForm } from '@components/Login-Mati/Assets/LoginForm/LoginForm';
 import AdminEstado from '@components/cambiarEstado/adminEstado';
-import ResetPassword from '@components/restablecerContraseña/contraseña';
 import Formulario from '@components/formulario/formulario';
 import RequestPasswordReset from '@components/enviarSolicitud/correo';
 import RecuperarHoraForm from '@components/formulario/RecuperarHoraForm';
 import ActivatePage from '@routes/ActivatePage';
 import AdminOpciones from '@components/Re-agenda/AdminOpciones';
+import ResetPasswordPageConfirm from '@components/restablecerContraseña/confirmarContrasena';
+import Home from '@components/Home/Home';
 // Definición de las rutas
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // Página principal
+    element: <Home />, // Página principal
   },
   {
     path: '/login',
@@ -44,14 +45,14 @@ const router = createBrowserRouter([
   },
   {
     path: '/password/reset/confirm/:uid/:token',
-    element: <ResetPassword />, // Ruta para restablecer contraseña
+    element: <ResetPasswordPageConfirm />, // Ruta para restablecer contraseña
   },
   {
     path: '/form',
     element: <Formulario />, // Ruta para formulario
   },
   {
-    path: '/correo',
+    path: '/reset-password',
     element: <RequestPasswordReset />,
   },
   {
@@ -66,6 +67,7 @@ const router = createBrowserRouter([
     path: '/adminOpciones',
     element: <AdminOpciones/>, // Ruta para activar la cuenta
   },
+
 ]);
 
 

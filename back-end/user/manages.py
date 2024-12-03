@@ -3,10 +3,10 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.utils.translation import gettext_lazy as _
 
-#usuario normal
+#usuario normal y datos necesarios para su creacion
 class managesusuario(BaseUserManager):
 
-    def create_user(self, rut, nombre,apellido, segundoapellido,email,tipousuario,password,especialidad,nombresupervisor,apellidosupervisor, rutsupervisor,**extra_fiels):
+    def create_user(self, rut, nombre,apellido, segundoapellido,email,tipousuario,password,especialidad,nombresupervisor,apellidosupervisor, rutsupervisor, emailjefe,**extra_fiels):
         if not rut:
             raise ValueError(_('Rut invalido'))
         
@@ -36,6 +36,8 @@ class managesusuario(BaseUserManager):
         
         if not rutsupervisor:
             raise ValueError(_('Rut del supervisor invalido'))
+        if not emailjefe:
+            raise ValueError(_('Email jefe invalido'))
         
         user = self.model(
             rut=rut,
@@ -48,6 +50,7 @@ class managesusuario(BaseUserManager):
             apellidosupervisor = apellidosupervisor,
             especialidad = especialidad,
             rutsupervisor = rutsupervisor,
+            emailjefe = emailjefe,
             **extra_fiels
         )
 
@@ -60,7 +63,7 @@ class managesusuario(BaseUserManager):
     
 
     #super usuario
-    def create_superuser(self, rut, nombre,apellido, segundoapellido,email,tipousuario,password,especialidad,nombresupervisor,apellidosupervisor,rutsupervisor,**extra_fiels):
+    def create_superuser(self, rut, nombre,apellido, segundoapellido,email,tipousuario,password,especialidad,nombresupervisor,apellidosupervisor,rutsupervisor, emailjefe,**extra_fiels):
         extra_fiels.setdefault('is_staff', True)
         extra_fiels.setdefault('is_superuser', True)
         extra_fiels.setdefault('is_active', True)
@@ -90,8 +93,11 @@ class managesusuario(BaseUserManager):
 
         if not rutsupervisor:
             raise ValueError(_('Rut del supervisor invalido'))
+        
+        if not emailjefe:
+            raise ValueError(_('Email jefe invalido'))
 
-        user = self.create_user(rut, nombre,apellido, segundoapellido,email,tipousuario,password,especialidad,nombresupervisor,apellidosupervisor,rutsupervisor,**extra_fiels)
+        user = self.create_user(rut, nombre,apellido, segundoapellido,email,tipousuario,password,especialidad,nombresupervisor,apellidosupervisor,rutsupervisor, emailjefe,**extra_fiels)
 
         user.save()
         return user
