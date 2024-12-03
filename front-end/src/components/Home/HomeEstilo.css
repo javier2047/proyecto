@@ -197,7 +197,12 @@
   
   @media (max-width: 480px) {
     .hero {
-      height: 200px;
+      height: 300px;
+      margin-top: 30px;
+    }
+
+    .home-container {
+      margin-bottom: 110px;
     }
   
     .hero h1 {
