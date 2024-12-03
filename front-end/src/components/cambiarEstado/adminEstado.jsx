@@ -125,9 +125,9 @@ function AdminEstado() {
 
   return (
     <Layout>
-      <div className="container">
+      <div className="container-cancel">
         <div className="py-4">
-          <h2 className="text-center mb-4 mt-5">
+          <h2 className="text-center mb-4">
             Administración de cancelaciones
           </h2>
           <div
