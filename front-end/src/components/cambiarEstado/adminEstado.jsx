@@ -2,6 +2,7 @@ import Layout from "@components/dashboard/layout/Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { fetchUserInfo } from "@services/getUserInfo";
+import './adminEstado.css';
 
 function AdminEstado() {
   const [data, setData] = useState([]);
@@ -125,7 +126,7 @@ function AdminEstado() {
 
   return (
     <Layout>
-      <div className="container-cancel">
+      <div className="EstadoContainer">
         <div className="py-4">
           <h2 className="text-center mb-4">
             Administración de cancelaciones
