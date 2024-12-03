@@ -1,8 +1,7 @@
 .sidebar{
     position: fixed;
-    top: 80px; /* Mantén la posición consistente con el diseño */
+    top: 76px; /* Mantén la posición consistente con el diseño */
     left: 0;
-    border-top-right-radius: 30px;
     width: 250px;
     z-index: 996;
     padding: 20px;

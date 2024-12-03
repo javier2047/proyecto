@@ -4,7 +4,7 @@ import SideBar from "./SideBar";
 
 export default function Layout({ children }) {
   return (
-    <div className="d-flex flex-column min-vh-500">
+    <div className="d-flex flex-column min-vh-">
       <Header />
       <div className="d-flex flex-grow-1">
         <SideBar />

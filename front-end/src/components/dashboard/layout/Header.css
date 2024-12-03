@@ -37,7 +37,7 @@
 }
 
 /* Main Container */
-.parent {
+/* .parent {
     position: relative;
     min-height: 500px;
     background: #f0f0f0;
@@ -45,7 +45,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
+} */
 
 /* Card Element */
 .my-5 {
