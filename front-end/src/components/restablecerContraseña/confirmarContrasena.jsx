@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { resetPasswordConfirm } from "../../features/auth/authSlice";
 import Spinner from "@components/Spinner";
-import { AiFillLock } from 'react-icons/ai'
+import { AiFillLock } from 'react-icons/ai';
+import "./confirmarContrasena.css";
 
 const ResetPasswordPageConfirm = () => {
   const { uid, token } = useParams();
@@ -54,14 +55,14 @@ const ResetPasswordPageConfirm = () => {
 
   return (
     <>
-      <div className="container auth__container">
+      <div className="Confirmpass">
         <h1 className="main__title">
           Reestablece tu contraseña <AiFillLock />
         </h1>
 
         {isLoading && <Spinner />}
 
-        <form className="auth__form">
+        <form className="Confirmpass">
           <input
             type="password"
             placeholder="Contraseña"
