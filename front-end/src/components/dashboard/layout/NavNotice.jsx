@@ -1,67 +1,98 @@
+import { useState, useEffect } from "react";
+import { fetchUserInfo } from "@services/getUserInfo";
+import { getCancelaciones } from "@services/apiServiceDashboard";
 
 function NavNotice() {
+  const [notificaciones, setNotificaciones] = useState([]);
+  const [rutSupervisor, setRutSupervisor] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNotificaciones = async () => {
+      try {
+        setIsLoading(true);
+
+        // Obtener el rut del supervisor actual
+        const userInfoArray = await fetchUserInfo();
+        const userInfo = userInfoArray[0];
+        const rut = userInfo.rut;
+        setRutSupervisor(rut);
+
+        // Obtener notificaciones (cancelaciones) filtradas por el rut del supervisor
+        const result = await getCancelaciones();
+        const notificacionesFiltradas = result.filter(
+          (item) => item.rutsupervisor === rut
+        );
+
+        setNotificaciones(notificacionesFiltradas);
+      } catch (error) {
+        console.error("Error al cargar notificaciones:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchNotificaciones();
+  }, []);
+
   return (
-    <li className='nav-item dropdown'>
-        <a className='nav-link nav-icon' data-bs-toggle='dropdown' href="#">
-            <i className='bi bi-bell'/>
-            <span className='badge bg-primary badge-number'>4</span>
-        </a>
+    <li className="nav-item dropdown">
+      <a className="nav-link nav-icon" data-bs-toggle="dropdown" href="#">
+        <i className="bi bi-bell" />
+        <span className="badge bg-primary badge-number">
+          {notificaciones.length}
+        </span>
+      </a>
 
-        <ul className='dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications'>
-            <li className='dropdown-header'>
-                Tienes 4 nuevas notificaciones
-                <a href="/estado">
-                    <span className='badge rounded-pill bg-primary p-2 ms-2'>
-                        Ver todos
-                    </span>
-                </a>
-            </li>
-            <li>
-                <hr className='dropdown-divider'/>
-            </li>
+      <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+        <li className="dropdown-header">
+          Tienes {notificaciones.length} nuevas notificaciones
+          <a href="/estado">
+            <span className="badge rounded-pill bg-primary p-2 ms-2">
+              Ver todos
+            </span>
+          </a>
+        </li>
+        <li>
+          <hr className="dropdown-divider" />
+        </li>
 
-            <li className='notification-item'>
-                <i className='bi bi-exclamation-circle text-warning'></i>
-                <div>
-                    <h4>Tienes una pendiente una aprobacion</h4>
-                    <p>Se te ha enviado una solicitud para anular la hora de Guillermo Lafourcade a las 13:25 del 12/12/2024</p>
-                    <p>Hace 30 minutos</p>
-                </div>
-            </li>
-            <li>
-                <hr className='dropdown-divider'/>
-            </li>
+        {/* Listar las notificaciones dinámicamente */}
+        {isLoading ? (
+          <li className="notification-item">Cargando notificaciones...</li>
+        ) : notificaciones.length === 0 ? (
+          <li className="notification-item">No tienes notificaciones</li>
+        ) : (
+          notificaciones.map((notificacion, index) => (
+            <li key={index} className="notification-item">
+              <i className="bi bi-exclamation-circle text-primary"></i>
+              <div>
+                {/* Mostrar nombre y apellido */}
+                <h4>{`${notificacion.nombre || "Sin nombre"} ${
+                  notificacion.apellido || "Sin apellido"
+                }`}</h4>
 
-            <li className='notification-item'>
-                <i className='bi bi-exclamation-circle text-danger'></i>
-                <div>
-                    <h4>Haz cancelado una hora medica</h4>
-                    <p>Haz cancelado la solicitud de Francisca Figueroa para las 13:30 de 01/12/2024</p>
-                    <p>Hace 2 horas y 08 minutos</p>
-                </div>
-            </li>
+                {/* Mostrar fecha de inicio */}
+                <p>
+                  {notificacion.fecha_inicio || "Fecha de inicio no disponible"}
+                </p>
 
-            <li>
-                <hr className='dropdown-divider'/>
+                {/* Mostrar motivo */}
+                <p>{notificacion.motivo || "Motivo no disponible"}</p>
+              </div>
             </li>
+          ))
+        )}
 
-            <li className='notification-item'>
-                <i className='bi bi-exclamation-circle text-success'></i>
-                <div>
-                    <h4>Haz Aprobado la cancelacion de:</h4>
-                    <p>Haz aprobado la cancelacion de Rodrigo Prado para las 16:00 29/11/2024</p>
-                    <p>Hace 2 horas</p>
-                </div>
-            </li>
-            <li>
-                <hr className='dropdown-divider'/>
-            </li>
-            <li className='dropdown-footer'>
-                <a href="#">Ver mas notificaciones</a>
-            </li>
-        </ul>
+        <li>
+          <hr className="dropdown-divider" />
+        </li>
+        <li className="dropdown-footer">
+          <a href="#">Ver más notificaciones</a>
+        </li>
+      </ul>
     </li>
-  )
+  );
 }
 
-export default NavNotice
+export default NavNotice;

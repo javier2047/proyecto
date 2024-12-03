@@ -2,8 +2,6 @@
     transition: all 0.5s;
     z-index: 997;
     height: 75px;
-    border-bottom-left-radius: 150px;
-    border-bottom-right-radius: 150px;
     background-color: #8b82822c;
     backdrop-filter: blur(5px);
     box-shadow: 0px 2px 20px rgba(1, 42, 112, 0.733);
@@ -12,9 +10,10 @@
     padding: 0 20px;
     color: white;
     padding-left: 50px;
-    display: flex;
     justify-content: space-between;
     align-items: center;
+    top: 0;
+    left: 0;
 }
 
 /* Search Bar and Toggle Sidebar Button */
@@ -38,7 +37,7 @@
 }
 
 /* Main Container */
-.parent {
+/* .parent {
     position: relative;
     min-height: 500px;
     background: #f0f0f0;
@@ -46,7 +45,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
+} */
 
 /* Card Element */
 .my-5 {
@@ -57,9 +56,9 @@
     border-radius: 15px;
     margin: 20px auto;
     max-width: 1000px;
-    padding-top: 30px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    top: 120px;
+    top: 300px;
+    padding: 20px;
 }
 
 /* --- Responsividad --- */
@@ -67,19 +66,31 @@
 /* Tablets y pantallas medianas (max-width: 768px) */
 @media (max-width: 768px) {
     .header {
-        height: 65px;
-        padding-left: 20px;
-        padding-right: 20px;
+        height: auto; /* Ajusta la altura si el contenido cambia */
+        padding: 10px; /* Espaciado interno menor */
     }
 
-    .header .toggle-sidebar-btn {
-        font-size: 24px;
-        padding-left: 10px;
+    .header-nav ul {
+        flex-direction: column; /* Apila los elementos del nav */
+        align-items: flex-end; /* Alinea los elementos al lado derecho */
     }
+
+    .header-nav .nav-icon {
+        font-size: 18px; /* Reduce el tamaño del icono */
+    }
+
+    .header-nav .nav-profile img {
+        max-height: 30px; /* Reduce el tamaño del avatar */
+    }
+
+    .logo img {
+        max-width: 100px; /* Ajusta el tamaño del logo */
+    }
+
 
     .my-5 {
         padding: 30px;
-        top: 250px;
+        top: 450px;
         width: 700px;
     }
 
@@ -89,7 +100,7 @@
 }
 
 /* Móviles pequeños (max-width: 480px) */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .header {
         height: 60px;
         border-bottom-left-radius: 100px;
@@ -107,10 +118,10 @@
         max-width: 75%;
         border-radius: 10px;
         left: 80px;
-        top: 300px;
+        top: 450px;
     }
 
     .parent {
         min-height: 300px;
     }
-}
+} */
