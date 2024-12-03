@@ -3,8 +3,14 @@
     position: relative;
     background: #fff;
     border-radius: 15px;
+<<<<<<< HEAD
+    padding: 0;
+    top: 10px;
+    margin-top: 10px;
+=======
     padding: 75px;
     margin-top: 100px;
+>>>>>>> 45bbbf7444208869bb00213b96068526df7b7002
     scrollbar-color: #09f;
 }
 
@@ -15,6 +21,12 @@
     top: 50px;
 }
 
+<<<<<<< HEAD
+.container-cancel{
+    margin-top: 20px;
+    text-align: center;
+=======
 .EstadoContainer {
     margin-bottom: 500px;
+>>>>>>> 45bbbf7444208869bb00213b96068526df7b7002
 }
