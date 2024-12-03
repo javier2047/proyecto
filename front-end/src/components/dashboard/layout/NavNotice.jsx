@@ -21,7 +21,7 @@ function NavNotice() {
         // Obtener notificaciones (cancelaciones) filtradas por el rut del supervisor
         const result = await getCancelaciones();
         const notificacionesFiltradas = result.filter(
-          (item) => item.rutsupervisor === rut
+          (item) => item.rutsupervisor === rut && item.estado === "pendiente"
         );
 
         setNotificaciones(notificacionesFiltradas);

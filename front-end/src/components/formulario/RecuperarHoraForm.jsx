@@ -1,6 +1,8 @@
 // frontend/src/components/RecuperarHoraForm.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importar el hook para redirigir
 import axios from 'axios';
+import "./RecuperarHoraForm.css";
 
 const RecuperarHoraForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,8 @@ const RecuperarHoraForm = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate(); // Hook para navegación
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +38,12 @@ const RecuperarHoraForm = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleLogout = () => {
+    // Lógica para cerrar sesión y redirigir
+    console.log('Cerrando sesión...');
+    navigate('/login'); // Cambia '/login' por la ruta del formulario anterior
   };
 
   return (
@@ -90,9 +100,18 @@ const RecuperarHoraForm = () => {
           />
         </div>
 
-        <button type="submit" disabled={loading}>
-          {loading ? 'Enviando...' : 'Enviar Solicitud'}
-        </button>
+        <div className="form-buttons">
+          <button type="submit" disabled={loading}>
+            {loading ? 'Enviando...' : 'Enviar Solicitud'}
+          </button>
+          <button
+            type="button"
+            className="logout-button"
+            onClick={handleLogout} // Manejar redirección
+          >
+            Cerrar Sesión
+          </button>
+        </div>
       </form>
     </div>
   );

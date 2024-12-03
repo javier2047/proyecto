@@ -45,7 +45,7 @@ function AdminOpciones() {
     <Layout>
       <div className="form-container">
         <div className="py-4">
-          <h2 className="text-center mb-4 mt-4">Listado de Tareas</h2>
+          <h2 className="text-center mb-2">Listado de Tareas</h2>
           <div className="custom-container">
             <div
               className="table-responsive"

@@ -67,7 +67,7 @@ function AdminEstado() {
 
         // Filtrar las solicitudes por el rut del supervisor
         const filteredData = extractedData.filter(
-          (item) => item.rutsupervisor === rutSupervisor
+          (item) => item.rutsupervisor === fetchedRutSupervisor && item.estado === "pendiente"
         );
 
         setData(filteredData); // Establecer los datos filtrados
