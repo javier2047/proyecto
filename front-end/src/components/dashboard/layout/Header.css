@@ -1,4 +1,4 @@
-#dashboard-header.header {
+.header {
     transition: all 0.5s;
     z-index: 997;
     height: 75px;
@@ -12,6 +12,19 @@
     padding-left: 50px;
     justify-content: space-between;
     align-items: center;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Search Bar and Toggle Sidebar Button */

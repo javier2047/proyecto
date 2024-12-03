@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      <header className="toper">
+      <header className="header">
         <div className="logo-container">
           <img src={logo} alt="RedSalud Logo" className="logo" />
         </div>
