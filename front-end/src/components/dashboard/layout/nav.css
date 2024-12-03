@@ -5,9 +5,16 @@
 .header-nav > ul{
     margin: 0;
     padding: 0;
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    /* align-items: center;
+    list-style: none; */
+    gap: 15px;
 }
 
-
+/* .header-nav{
+    height: 500px;
+} */
 
 .header-nav .nav-icon {
     font-size: 25px;
@@ -21,7 +28,8 @@
 }
 
 .header-nav .nav-profile img {
-    max-height: 45px;
+    max-height: 35px;
+    border-radius: 50%;
 }
 
 .header-nav .nav-profile span{
@@ -161,3 +169,37 @@
     line-height: 0;
 }
 
+@media (max-width: 768px){
+    .header{
+        justify-content: space-between;
+    }
+    .header-nav > ul {
+        justify-content: flex-end;
+        gap: 5px;
+        align-items: flex-start;
+    }
+
+    .header-nav .nav-icon{
+        font-size: 15px;
+        margin-right: 5px;
+    }
+
+    .header-nav .nav-profile{
+        min-width: auto;
+    }
+    .header-nav .nav-profile img{
+        font-size: 10px;
+        padding: 1px 5px;
+    }
+    .header-nav .badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: red;
+        color: white;
+        font-size: 10px; /* Ajusta el tamaño */
+        padding: 2px 5px; /* Ajusta el relleno */
+        border-radius: 50%; /* Mantiene el badge circular */
+    }
+    
+}
